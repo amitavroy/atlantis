@@ -1,4 +1,4 @@
-# Unicorn
+# Atlantis
 
 This is an application which I use for many of my day to day activity. It has many modules which are listed below:
 
