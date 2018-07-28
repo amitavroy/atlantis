@@ -11,7 +11,7 @@ require('vuejs-confirm-directive');
 window.Vue = require('vue');
 
 Vue.component('sidebar-toggle', require('./components/SidebarToggle.vue'));
-Vue.component('task-item', require('./modules/Task/TaskItem.vue'));
+Vue.component('task-group', require('./modules/Task/TaskGroup.vue'));
 
 window.eventBus = new Vue({});
 

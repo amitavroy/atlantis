@@ -17,7 +17,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('/tasks', 'TaskController@index')->name('task.index');
-    Route::view('/tasks/add', 'task.task-add')->name('task.add');
-    Route::post('/tasks/add', 'TaskController@store')->name('task.save');
+    Route::get('/personal/tasks', 'TaskController@index')->name('task.index');
+    Route::view('/personal/tasks/add', 'task.task-add')->name('task.add');
+    Route::post('/personal/tasks/add', 'TaskController@store')->name('task.save');
 });

@@ -20,26 +20,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 offset-2">
-            <div class="tile">
-                <div class="tile-title-w-btn">
-                    <h3 class="title">All Tasks ({{$tasks->count()}})</h3>
-                    <p>
-                        <a class="btn btn-primary icon-btn" href="{{route('task.add')}}">
-                            <i class="fa fa-plus"></i>Add Task
-                        </a>
-                    </p>
-                </div>
-
-                <div class="tile-body">
-                    <ul class="list-group list-group-flush">
-                        @foreach($tasks as $task)
-                            <task-item
-                                    description="{{$task->description}}" id="{{$task->id}}"
-                            ></task-item>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+            <task-group :tasks="{{$tasks}}" url="{{route('task.add')}}"></task-group>
         </div>
     </div>
 @endsection
