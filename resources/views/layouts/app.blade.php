@@ -21,7 +21,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="app sidebar-mini rtl">
+<body class="app sidebar-mini rtl sidebar-toggled">
 
     <div id="app">
         @include('layouts.nav')

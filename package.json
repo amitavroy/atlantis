@@ -27,6 +27,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "domready": "^1.0.8",
         "vuejs-confirm-directive": "^1.0.3"
     }
 }
