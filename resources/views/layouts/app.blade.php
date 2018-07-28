@@ -35,20 +35,5 @@
             @yield('content')
         </main>
     </div>
-    {{--<div id="app">--}}
-
-
-        {{--<div class="container">--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-12">--}}
-                    {{--@include('flash::message')--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-
-        {{--<main class="py-4">--}}
-            {{--@yield('content')--}}
-        {{--</main>--}}
-    {{--</div>--}}
 </body>
 </html>
