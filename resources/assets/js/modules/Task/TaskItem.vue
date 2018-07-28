@@ -2,7 +2,14 @@
   <li class="list-group-item description"
       @mouseover="handleMouseOver" @mouseout="handleMouseOut">
     {{description}}
-    <span class="float-right done" v-if="displayExtras">
+    <span class="float-right done cursor"
+      v-if="displayExtras"
+      v-confirm.reload="{
+        link: '/api/tasks/delete',
+        message: 'Are you sure you want to delete this task?',
+        data: {'task_id': id},
+        callback: handleDelete
+      }">
       Done
     </span>
   </li>
@@ -10,7 +17,7 @@
 
 <script>
   export default {
-    props: ['description'],
+    props: ['description', 'id'],
 
     data () {
       return {
@@ -19,11 +26,16 @@
     },
 
     methods: {
-      handleMouseOver () {
+      handleMouseOver() {
         this.displayExtras = true;
       },
-      handleMouseOut () {
+      handleMouseOut() {
         this.displayExtras = false;
+      },
+      handleDelete(response) {
+        if (response.status === 200) {
+          window.eventBus.$emit('eventTaskDeleted', this.id);
+        }
       }
     }
   }

@@ -23,7 +23,7 @@
                     <ul class="list-group list-group-flush">
                         @foreach($tasks as $task)
                             <task-item
-                                description="{{$task->description}}"
+                                description="{{$task->description}}" id="{{$task->id}}"
                             ></task-item>
                         @endforeach
                     </ul>

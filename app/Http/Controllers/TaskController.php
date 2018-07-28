@@ -31,4 +31,21 @@ class TaskController extends Controller
         flash('Your task is created.')->success();
         return redirect()->route('task.index');
     }
+
+    public function remove(Request $request)
+    {
+        $id = $request->input('task_id');
+
+        $task = Task::where('id', $id)->first();
+
+        if ($task->user_id != Auth::user()->id) {
+            abort(401, 'You are not allowed to delete this task');
+        }
+
+        if (!$task->delete()) {
+            abort(400, 'Bad request. Task was not deleted.');
+        }
+
+        return response([], 200);
+    }
 }

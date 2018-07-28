@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('vuejs-confirm-directive');
 
 window.Vue = require('vue');
 
@@ -16,6 +17,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('task-item', require('./modules/Task/TaskItem.vue'));
+
+window.eventBus = new Vue({});
 
 const app = new Vue({
     el: '#app'

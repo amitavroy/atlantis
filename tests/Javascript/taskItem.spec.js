@@ -24,4 +24,6 @@ describe('Task item', () => {
     expect(wrapper.find('.done').text()).toBe('Done');
   });
 
+  
+
 });

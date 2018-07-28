@@ -84,4 +84,30 @@ class TaskTest extends TestCase
             ->post(route('task.save'), [])
             ->assertSessionHasErrors('description');
     }
+
+    /** @test */
+    public function a_user_can_delete_task_his_own_task()
+    {
+        $task = factory(Task::class)->create();
+
+        $this->actingAs($this->user, 'api')
+            ->post(route('task.delete'), [
+                'task_id' => $task->id,
+            ])
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function a_user_cannot_delete_others_task()
+    {
+        $task = factory(Task::class)->create([
+            'user_id' => 2,
+        ]);
+
+        $this->actingAs($this->user, 'api')
+            ->post(route('task.delete'), [
+                'task_id' => $task->id,
+            ])
+            ->assertStatus(401);
+    }
 }
