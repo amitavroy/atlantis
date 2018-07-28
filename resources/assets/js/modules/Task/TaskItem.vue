@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import VueConfirm from 'vuejs-confirm-directive';
+
   export default {
     props: ['description', 'id'],
 
