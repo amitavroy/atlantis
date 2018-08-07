@@ -11,7 +11,8 @@
 |
 */
 
-Route::view('/', 'welcome')->name('welcome');
+Route::view('/', 'login')->name('welcome');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
