@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row">
+    <div class="col-md-3">
+        <icon-widget
+            color="info"
+            text="Tasks"
+            count="{{$dashData['tasks']}}"
+            icon="fa-tasks"
+        ></icon-widget>
+    </div>
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

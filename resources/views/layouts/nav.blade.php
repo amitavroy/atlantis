@@ -1,5 +1,5 @@
 <!-- Navbar-->
-<header class="app-header"><a class="app-header__logo" href="index.html">{{ config('app.name', 'Laravel') }}</a>
+<header class="app-header"><a class="app-header__logo" href="{{url('/')}}">{{ config('app.name', 'Laravel') }}</a>
     <!-- Sidebar toggle button-->
     <sidebar-toggle></sidebar-toggle>
     <!-- Navbar Right Menu-->

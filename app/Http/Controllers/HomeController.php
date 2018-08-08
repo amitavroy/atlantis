@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\DashboardService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,10 +21,17 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
+     * @param DashboardService $dashboardService
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DashboardService $dashboardService)
     {
-        return view('home');
+        if (Auth::guest()) {
+            return redirect('/');
+        }
+
+        $dashData = $dashboardService->getDashboardData();
+
+        return view('home')->with('dashData', $dashData);
     }
 }

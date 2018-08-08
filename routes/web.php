@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'login')->name('welcome');
+Route::get('/', 'GuestController@welcome')->name('welcome');
 
 Auth::routes();
 
