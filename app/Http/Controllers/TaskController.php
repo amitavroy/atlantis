@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Task\TaskCreatedEvent;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 
 class TaskController extends Controller
 {
@@ -26,7 +28,10 @@ class TaskController extends Controller
 
         $data['user_id'] = Auth::user()->id;
 
-        Task::create($data);
+        $task = Task::create($data);
+
+//        event(new TaskCreatedEvent($task));
+        Event::fire(new TaskCreatedEvent($task));
 
         flash('Your task is created.')->success();
         return redirect()->route('task.index');

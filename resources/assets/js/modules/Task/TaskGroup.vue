@@ -21,7 +21,7 @@
       <div class="tile-body">
         <ul class="list-group list-group-flush" v-if="!loading">
           <task-item
-            v-for="task in tasks"
+            v-for="task in localTasks"
             :description="task.description" :key="task.id"
           ></task-item>
         </ul>
@@ -41,14 +41,20 @@
     },
 
     created() {
+      window.Echo.channel('tasks').listen('.task.created', data => {
+        this.localTasks.unshift(data.task);
+      });
+
       setTimeout(() => {
+        this.localTasks = this.tasks;
         this.loading = false;
       }, 700)
     },
 
     data() {
       return {
-        loading: true
+        loading: true,
+        localTasks: []
       }
     }
   }

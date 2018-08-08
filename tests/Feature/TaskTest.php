@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Events\Task\TaskCreatedEvent;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskTest extends TestCase
 {
@@ -75,6 +74,17 @@ class TaskTest extends TestCase
         $this->actingAs($this->user)
             ->get(route('task.index'))
             ->assertSee('My task');
+    }
+
+    /** @test */
+    public function an_event_is_fired_when_task_is_created()
+    {
+        $this->expectsEvents(TaskCreatedEvent::class);
+
+        $postData = ['description' => 'My task'];
+
+        $this->actingAs($this->user)
+            ->post(route('task.save'), $postData);
     }
 
     /** @test */
