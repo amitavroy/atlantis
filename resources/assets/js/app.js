@@ -10,6 +10,7 @@ require('vuejs-confirm-directive');
 
 window.Vue = require('vue');
 
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('sidebar-toggle', require('./components/SidebarToggle.vue'));
 Vue.component('task-group', require('./modules/Task/TaskGroup.vue'));
 Vue.component('icon-widget', require('./components/IconWidget.vue'));

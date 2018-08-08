@@ -10,16 +10,27 @@
 
 <script>
 export default {
-  props: ['color', 'text', 'count', 'icon'],
+  props: ['color', 'text', 'count', 'icon', 'eventName'],
+  created() {
+    (this.count) ? this.widgetCount = this.count : this.widgetCount = 0;
+
+    if (this.eventName) {
+      window.eventBus.$on(this.eventName, event => {
+        this.widgetCount = event;
+      });
+    }
+  },
+  data() {
+    return {
+      widgetCount: null
+    }
+  },
   computed: {
     widgetColor() {
       return (this.color) ? this.color : 'primary';
     },
     widgetText() {
       return (this.text) ? this.text : 'Undefined';
-    },
-    widgetCount() {
-      return (this.count) ? this.count : 0;
     },
     widgetIcon() {
       return (this.icon) ? this.icon : 'fa-users';

@@ -8,6 +8,7 @@
             text="Tasks"
             count="{{$dashData['tasks']}}"
             icon="fa-tasks"
+            event-name="taskCountUpdated"
         ></icon-widget>
     </div>
 </div>
