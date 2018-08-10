@@ -40,7 +40,7 @@ class TaskController extends Controller
     {
         $id = $request->input('task_id');
 
-        $task = Task::where('id', $id)->first();
+        $task = Task::findOrFail($id);
 
         if ($task->user_id != Auth::user()->id) {
             abort(401, 'You are not allowed to delete this task');

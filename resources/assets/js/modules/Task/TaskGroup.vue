@@ -22,7 +22,9 @@
         <ul class="list-group list-group-flush" v-if="!loading">
           <task-item
             v-for="task in localTasks"
-            :description="task.description" :key="task.id"
+            :description="task.description"
+            :id="task.id"
+            :key="task.id"
           ></task-item>
         </ul>
       </div>
