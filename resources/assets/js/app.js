@@ -17,6 +17,8 @@ Vue.component('icon-widget', require('./components/IconWidget.vue'));
 
 window.eventBus = new Vue({});
 
+require('./socketEvents');
+
 const app = new Vue({
   el: '#app'
 });

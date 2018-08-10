@@ -30,8 +30,7 @@ class TaskController extends Controller
 
         $task = Task::create($data);
 
-//        event(new TaskCreatedEvent($task));
-        Event::fire(new TaskCreatedEvent($task));
+        Event::dispatch(new TaskCreatedEvent($task));
 
         flash('Your task is created.')->success();
         return redirect()->route('task.index');

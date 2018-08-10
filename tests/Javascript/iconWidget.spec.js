@@ -55,8 +55,8 @@ describe('Icon widget component', () => {
 
     expect(wrapper.html()).toContain('<p><b>45</b></p>');
 
-    window.eventBus.$emit('taskCountUpdated', 4);
+    window.eventBus.$emit('taskCountUpdated');
 
-    expect(wrapper.html()).toContain('<p><b>4</b></p>');
+    expect(wrapper.html()).toContain('<p><b>46</b></p>');
   });
 });

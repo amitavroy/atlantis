@@ -16,7 +16,7 @@ export default {
 
     if (this.eventName) {
       window.eventBus.$on(this.eventName, event => {
-        this.widgetCount = event;
+        this.widgetCount++;
       });
     }
   },
