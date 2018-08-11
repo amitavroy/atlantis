@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Events\Task\TaskCreatedEvent;
+use App\Events\Task\TaskDeletedEvent;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -85,6 +86,19 @@ class TaskTest extends TestCase
 
         $this->actingAs($this->user)
             ->post(route('task.save'), $postData);
+    }
+
+    /** @test */
+    public function an_event_is_fired_when_task_is_deleted()
+    {
+        $this->expectsEvents(TaskDeletedEvent::class);
+
+        $task = factory(Task::class)->create();
+
+        $this->actingAs($this->user, 'api')
+            ->post(route('task.delete'), [
+                'task_id' => $task->id,
+            ]);
     }
 
     /** @test */
