@@ -15,9 +15,7 @@ export default {
     (this.count) ? this.widgetCount = this.count : this.widgetCount = 0;
 
     if (this.eventName) {
-      window.eventBus.$on(this.eventName, event => {
-        this.widgetCount++;
-      });
+      window.eventBus.$on(this.eventName, event => this.handleTaskCountUpdated(event));
     }
   },
   data() {
@@ -34,6 +32,22 @@ export default {
     },
     widgetIcon() {
       return (this.icon) ? this.icon : 'fa-users';
+    }
+  },
+  methods: {
+    handleTaskCountUpdated(condition) {
+      switch (condition) {
+        case 'increment':
+        this.widgetCount++;
+        break;
+
+        case 'decrement':
+        this.widgetCount--;
+        break;
+
+        default:
+        return false;
+      }
     }
   }
 }

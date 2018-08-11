@@ -23,8 +23,7 @@ class TaskCreatedEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        logger($this->task);
-        return new Channel('tasks');
+        return new PrivateChannel('Tasks');
     }
 
     public function broadcastAs()

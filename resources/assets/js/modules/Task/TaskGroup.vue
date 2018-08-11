@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import _ from 'lodash';
   import TaskItem from './TaskItem';
 
   export default {
@@ -42,22 +43,25 @@
       TaskItem
     },
 
+    data() {
+      return {
+        loading: true,
+        localTasks: []
+      }
+    },
+
     created() {
-      window.Echo.channel('tasks').listen('.task.created', data => {
+      window.eventBus.$on('taskCountIncrement', data => {
         this.localTasks.unshift(data.task);
+      });
+      window.eventBus.$on('taskCountDecrement', data => {
+        this.localTasks = _.filter(this.localTasks, task => {return task.id != data.taskId});
       });
 
       setTimeout(() => {
         this.localTasks = this.tasks;
         this.loading = false;
       }, 700)
-    },
-
-    data() {
-      return {
-        loading: true,
-        localTasks: []
-      }
     }
   }
 </script>

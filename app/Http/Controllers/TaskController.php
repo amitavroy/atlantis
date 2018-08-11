@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\Task\TaskCreatedEvent;
+use App\Events\Task\TaskDeletedEvent;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,11 @@ class TaskController extends Controller
     {
         $id = $request->input('task_id');
 
-        $task = Task::findOrFail($id);
+        $task = Task::find($id);
+
+        if (!$task) {
+            abort(400, 'Bad request. Task not found');
+        }
 
         if ($task->user_id != Auth::user()->id) {
             abort(401, 'You are not allowed to delete this task');
@@ -49,6 +54,8 @@ class TaskController extends Controller
         if (!$task->delete()) {
             abort(400, 'Bad request. Task was not deleted.');
         }
+
+        Event::dispatch(new TaskDeletedEvent($id));
 
         return response([], 200);
     }

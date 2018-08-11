@@ -16,7 +16,7 @@ class ProfileTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = factory(User::class)->create(['name' => 'Jhon Doe']);
     }
 
     /** @test */
@@ -26,7 +26,7 @@ class ProfileTest extends TestCase
             ->get(route('profile.index'))
             ->assertStatus(200)
             ->assertSee("My profile")
-            ->assertSee($this->user->name);
+            ->assertSee('Jhon Doe');
     }
 
     /** @test */

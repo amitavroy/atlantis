@@ -42,7 +42,7 @@ describe('Icon widget component', () => {
     expect(wrapper.html()).toContain('<i class="icon fa fa-3x fa-users"></i>');
   });
 
-  it('event is raised value is visible', () => {
+  it('when increment event is raised then value is increased', () => {
     wrapper = mount(IconWidget, {
       propsData: {
         color: 'primary',
@@ -54,9 +54,23 @@ describe('Icon widget component', () => {
     });
 
     expect(wrapper.html()).toContain('<p><b>45</b></p>');
-
-    window.eventBus.$emit('taskCountUpdated');
-
+    window.eventBus.$emit('taskCountUpdated', 'increment');
     expect(wrapper.html()).toContain('<p><b>46</b></p>');
+  });
+
+  it('when decrement event is raised then value is decreased', () => {
+    wrapper = mount(IconWidget, {
+      propsData: {
+        color: 'primary',
+        text: 'Testing',
+        count: 45,
+        icon: 'fa-users',
+        eventName: 'taskCountUpdated'
+      }
+    });
+
+    expect(wrapper.html()).toContain('<p><b>45</b></p>');
+    window.eventBus.$emit('taskCountUpdated', 'decrement');
+    expect(wrapper.html()).toContain('<p><b>44</b></p>');
   });
 });
