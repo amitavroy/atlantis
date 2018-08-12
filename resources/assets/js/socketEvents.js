@@ -8,3 +8,11 @@ window.Echo.private('Tasks').listen('.task.deleted', data => {
   window.eventBus.$emit('taskCountDecrement', data);
   window.eventBus.$emit('taskCountUpdated', 'decrement');
 });
+
+window.Echo.private('Dashboard').listen('.site.normal', data => {
+  window.eventBus.$emit('siteMonitorDataUpdate', data);
+});
+
+window.Echo.private('Dashboard').listen('.site.slow', data => {
+  window.eventBus.$emit('siteIsSlow', data);
+});

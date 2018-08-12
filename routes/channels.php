@@ -19,3 +19,7 @@ Broadcast::channel('Tasks', function () {
     return true;
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('Dashboard', function () {
+    return true;
+});

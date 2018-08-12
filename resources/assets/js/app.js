@@ -14,6 +14,7 @@ window.Vue = require('vue');
 Vue.component('sidebar-toggle', require('./components/SidebarToggle.vue'));
 Vue.component('task-group', require('./modules/Task/TaskGroup.vue'));
 Vue.component('icon-widget', require('./components/IconWidget.vue'));
+Vue.component('site-monitor', require('./components/SiteMonitor.vue'));
 
 window.eventBus = new Vue({});
 
