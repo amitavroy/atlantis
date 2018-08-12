@@ -11,6 +11,14 @@
             event-name="taskCountUpdated"
         ></icon-widget>
     </div>
+    <div class="col-md-3">
+        <icon-widget
+            color="info"
+            text="Sites"
+            count="{{$dashData['sites']}}"
+            icon="fa-globe"
+        ></icon-widget>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-4">

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Site;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +12,7 @@ class DashboardService
     {
         return [
             'tasks' => count($this->getTaskCount()),
+            'sites' => count($this->getSitesCount()),
         ];
     }
 
@@ -19,5 +21,10 @@ class DashboardService
         return Task::where('user_id', Auth::user()->id)
             ->where('is_complete', 0)
             ->get();
+    }
+
+    private function getSitesCount()
+    {
+        return Site::orderBy('name', 'asc')->get();
     }
 }
