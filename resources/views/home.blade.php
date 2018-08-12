@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-3">
         <icon-widget
-            color="info"
+            color="warning"
             text="Sites"
             count="{{$dashData['sites']}}"
             icon="fa-globe"
