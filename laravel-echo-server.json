@@ -1,5 +1,5 @@
 {
-	"authHost": "http://localhost:8000",
+	"authHost": "http://prime.amitavroy.com",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
