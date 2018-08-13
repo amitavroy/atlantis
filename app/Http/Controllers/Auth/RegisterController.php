@@ -40,6 +40,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        abort(400, 'Registration is closed.');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -63,6 +68,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        abort(400, 'User registration is disabled');
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
