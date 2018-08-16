@@ -17,8 +17,16 @@
                         class="app-menu__label">My {{config('app.name')}}</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item {{Route::is('task.index') ? 'active' : ''}}" href="{{route('task.index')}}"><i
-                                class="icon fa fa-circle-o"></i> My tasks</a></li>
+                <li>
+                    <a class="treeview-item {{Route::is('task.index') ? 'active' : ''}}" href="{{route('task.index')}}">
+                        <i class="icon fa fa-circle-o"></i> My tasks
+                    </a>
+                </li>
+                <li>
+                    <a class="treeview-item {{Route::is('expense.index') ? 'active' : ''}}" href="{{route('expense.index')}}">
+                        <i class="icon fa fa-circle-o"></i> My Expenses
+                    </a>
+                </li>
             </ul>
         </li>
         <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li>

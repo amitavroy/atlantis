@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\Task\TaskCreatedEvent;
 use App\Events\Task\TaskDeletedEvent;
 use App\Task;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -23,11 +24,12 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        $data =$this->validate($request, [
+        $data = $this->validate($request, [
             'description' => 'required|min:3',
         ]);
 
         $data['user_id'] = Auth::user()->id;
+        $data['family_id'] = Auth::user()->family_id;
 
         $task = Task::create($data);
 

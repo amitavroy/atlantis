@@ -28,6 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $with = ['family'];
+
+    public function family()
+    {
+        return $this->belongsTo(Family::class, 'family_id');
+    }
+
     public function tasks()
     {
         return $this->hasMany(Task::class);

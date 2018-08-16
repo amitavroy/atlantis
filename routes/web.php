@@ -26,4 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*Profile URLs*/
     Route::get('/profile', 'ProfileController@index')->name('profile.index');
     Route::post('/profile', 'ProfileController@save')->name('profile.save');
+
+    /*Expenses URLs*/
+    Route::get('/expenses', 'ExpenseController@index')->name('expense.index');
 });
