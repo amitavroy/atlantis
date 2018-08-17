@@ -19,6 +19,7 @@ before_script:
   
 script:
   - vendor/bin/phpunit --coverage-text
+  - vendor/bin/phpcs --standard=PSR2 app/
   - npm run test
   # - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
   # - npm run production

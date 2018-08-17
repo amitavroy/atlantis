@@ -13,11 +13,19 @@ class SiteIsSlowMail extends Mailable
 
     public $site;
 
+    /**
+     * SiteIsSlowMail constructor.
+     * @param Site $site
+     */
     public function __construct(Site $site)
     {
         $this->site = $site;
     }
 
+    /**
+     * Send the email.
+     * @return SiteIsSlowMail
+     */
     public function build()
     {
         return $this->from('reachme@amitavroy.com', 'Amitav Roy')

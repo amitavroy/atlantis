@@ -26,24 +26,32 @@
                     <p><a class="btn btn-primary icon-btn" href=""><i class="fa fa-plus"></i>Add Item	</a></p>
                 </div>
                 <div class="tile-body">
-                    <table class="table table-bordered">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th>Description</th>
-                            <th>User</th>
+                            <th>Category</th>
                             <th>Date</th>
                             <th>Amount</th>
-                            <th>Payment method</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($expenses as $expense)
                         <tr>
                             <td>{{$expense->description}}</td>
-                            <td>{{$expense->user->name}}</td>
-                            <td>{{$expense->transaction_date}}</td>
-                            <td>{{$expense->amount}}</td>
-                            <td>{{$expense->payment_method}}</td>
+                            <td>
+                                {{$expenseTypes->where('id', $expense->expense_type_id)->first()->name}}
+                                <br>
+                                <small class="text-muted">{{$expense->payment_method}}</small>
+                            </td>
+                            <td>
+                                {{$expense->transaction_date}}
+                                <br>
+                                <small class="text-muted">by {{$expense->user->name}}</small>
+                            </td>
+                            <td>
+                                <span class="text-muted">Rs</span> {{number_format($expense->amount, 2, '.', ',')}}
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

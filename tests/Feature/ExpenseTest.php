@@ -16,7 +16,7 @@ class ExpenseTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class)->create();
+        $this->user = factory(User::class)->create(['name' => 'Amitav Roy']);
     }
 
     /** @test */
@@ -39,11 +39,14 @@ class ExpenseTest extends TestCase
     /** @test */
     public function a_user_can_see_his_expenses()
     {
-        $exp1 = factory(Expense::class)->create();
-        $exp2 = factory(Expense::class)->create();
+        $desc1 = 'Payment of something';
+        $desc2 = 'Payment of many thingd';
+        $exp1 = factory(Expense::class)->create(['description' => $desc1]);
+        $exp2 = factory(Expense::class)->create(['description' => $desc2]);
         $this->actingAs($this->user)
             ->get(route('expense.index'))
-            ->assertSee($exp1->description)
-            ->assertSee($exp2->description);
+            ->assertSee($desc1)
+            ->assertSee($desc2)
+            ->assertSee('Amitav Roy');
     }
 }
