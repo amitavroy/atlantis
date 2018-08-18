@@ -21,4 +21,18 @@ npm install
 php artisan migrate --seed
 ```
 
-Once these commands are executes, we have all the dependencies required and also the database also has some data to start with. You can login to the application 
+Once these commands are executes, we have all the dependencies required and also the database also has some data to start with. You can login to the application.
+
+```
+username: reachme@amitavroy.com
+password: password
+```
+
+For this application to run, there are a few things which need to run as service 
+1. You need to run Laravel Echo Server so that the socket connection is maintained and also, for that you need to configure the laravel-echo-server.json file specifically the "authHost" to your application.
+2. You need to ensure the cron is running because the site monitoring feature uses cron jobs to check the site health.
+
+For the laravel echo server you can run on your local environment and the laravel echo server will start
+```
+./node_modules/.bin/laravel-echo-server start
+```

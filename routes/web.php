@@ -30,3 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*Expenses URLs*/
     Route::get('/expenses', 'ExpenseController@index')->name('expense.index');
 });
+
+Route::get('query', function () {
+    return \Illuminate\Support\Facades\DB::table('expenses')->get();
+});

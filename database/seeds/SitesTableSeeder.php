@@ -16,11 +16,5 @@ class SitesTableSeeder extends Seeder
             'url' => 'https://www.amitavroy.com',
             'email' => 'reachme@amitavroy.com',
         ]);
-
-        \App\Site::create([
-            'name' => 'SplitSecondPix',
-            'url' => 'http://new.splitsecondpix.com',
-            'email' => 'reachme@amitavroy.com',
-        ]);
     }
 }
