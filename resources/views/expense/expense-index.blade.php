@@ -23,41 +23,15 @@
             <div class="tile">
                 <div class="tile-title-w-btn">
                     <h3 class="title"></h3>
-                    <p><a class="btn btn-primary icon-btn" href=""><i class="fa fa-plus"></i>Add Item	</a></p>
+                    <p>
+                        <a class="btn btn-primary icon-btn" href="#"
+                           onclick="event.preventDefault(); window.eventBus.$emit('toggleAddExpenseForm')">
+                            <i class="fa fa-plus"></i>Add Item	</a>
+                    </p>
                 </div>
                 <div class="tile-body">
                     <expense-add></expense-add>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Category</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($expenses as $expense)
-                        <tr>
-                            <td>{{$expense->description}}</td>
-                            <td>
-                                {{$expenseTypes->where('id', $expense->expense_type_id)->first()->name}}
-                                <br>
-                                <small class="text-muted">{{$expense->payment_method}}</small>
-                            </td>
-                            <td>
-                                {{$expense->transaction_date}}
-                                <br>
-                                <small class="text-muted">by {{$expense->user->name}}</small>
-                            </td>
-                            <td>
-                                <span class="text-muted">Rs</span> {{number_format($expense->amount, 2, '.', ',')}}
-                            </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
+                    <expense-list :expenses="{{json_encode($viewData)}}"></expense-list>
                     {{$expenses->render()}}
                 </div>
             </div>

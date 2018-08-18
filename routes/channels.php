@@ -23,3 +23,7 @@ Broadcast::channel('Tasks', function () {
 Broadcast::channel('Dashboard', function () {
     return true;
 });
+
+Broadcast::channel('Expenses', function () {
+    return true;
+});

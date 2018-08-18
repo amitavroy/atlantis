@@ -1,5 +1,6 @@
 <template>
-  <div class="expense-add__wrapper">
+  <div class="expense-add__wrapper" v-if="show">
+    <h3>Add new expense</h3>
     <form v-on:submit.prevent="handleFormSubmit">
       <div class="form-group">
         <label for="desciption">Description</label>
@@ -40,12 +41,17 @@
     },
     data() {
       return {
+        show: false,
         expense: this.setEmptyDescription(),
         options: [],
         transType: ['Cash', 'Credit Card', 'Net Banking']
       }
     },
     created() {
+      window.eventBus.$on('toggleAddExpenseForm', () => {
+        this.show = !this.show;
+      });
+
       axios.get('/api/expenses/categories').then(response => {
         this.options = _.map(response.data, 'name');
       });
@@ -61,10 +67,8 @@
         }
       },
       handleFormSubmit() {
-        console.log(this.expense);
         axios.post('/api/expenses', this.expense).then(response => {
-          // this.expense = this.setEmptyDescription();
-          console.log(response.data);
+          this.expense = this.setEmptyDescription();
         });
       }
     }

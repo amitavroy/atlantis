@@ -16,3 +16,7 @@ window.Echo.private('Dashboard').listen('.site.normal', data => {
 window.Echo.private('Dashboard').listen('.site.slow', data => {
   window.eventBus.$emit('siteIsSlow', data);
 });
+
+window.Echo.private('Expenses').listen('.expense.created', data => {
+  window.eventBus.$emit('expenseAdded', data);
+});

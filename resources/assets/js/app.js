@@ -16,6 +16,7 @@ Vue.component('task-group', require('./modules/Task/TaskGroup.vue'));
 Vue.component('icon-widget', require('./components/IconWidget.vue'));
 Vue.component('site-monitor', require('./components/SiteMonitor.vue'));
 Vue.component('expense-add', require('./modules/Expense/ExpenseAdd.vue'));
+Vue.component('expense-list', require('./modules/Expense/ExpenseList.vue'));
 
 window.eventBus = new Vue({});
 
