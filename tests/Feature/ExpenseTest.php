@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Events\Expense\ExpenseAddedEvent;
 use App\Expense;
 use App\ExpenseType;
 use App\User;
@@ -78,6 +79,22 @@ class ExpenseTest extends TestCase
     }
 
     /** @test */
+    public function a_user_should_not_see_other_family_expenses()
+    {
+        $otherUser = factory(User::class)->create();
+        $category = factory(ExpenseType::class)->create([
+            'family_id' => $otherUser->family_id,
+            'name' => 'Test',
+        ]);
+
+        $this->saveExpense($otherUser, $category);
+
+        $this->actingAs($this->user)
+            ->get(route('expense.index'))
+            ->assertDontSee('Some expense description');
+    }
+
+    /** @test */
     public function a_user_can_save_expense()
     {
         $category = factory(ExpenseType::class)->create([
@@ -85,17 +102,9 @@ class ExpenseTest extends TestCase
             'name' => 'Test',
         ]);
 
-        $postData = [
-            'description' => 'Some expense description',
-            'transaction_date' => '2018-07-31',
-            'amount' => 465,
-            'category' => $category->name,
-            'type' => 'Cash'
-        ];
+        $response = $this->saveExpense($this->user, $category);
 
-        $this->actingAs($this->user, 'api')
-            ->post('/api/expenses', $postData)
-            ->assertStatus(201)
+        $response->assertStatus(201)
             ->assertJsonFragment([
                 'description' => 'Some expense description',
                 'transaction_date' => '2018-07-31',
@@ -118,5 +127,32 @@ class ExpenseTest extends TestCase
                 'type',
                 'category',
             ]);
+    }
+
+    /** @test */
+    public function an_event_should_be_fired_when_expense_is_saved()
+    {
+        $this->expectsEvents(ExpenseAddedEvent::class);
+
+        $category = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Test',
+        ]);
+
+        $this->saveExpense($this->user, $category);
+    }
+
+    private function saveExpense($user, $category)
+    {
+        $postData = [
+            'description' => 'Some expense description',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $category->name,
+            'type' => 'Cash'
+        ];
+
+        return $this->actingAs($user, 'api')
+            ->post('/api/expenses', $postData);
     }
 }
