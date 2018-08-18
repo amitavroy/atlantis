@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\Expense\ExpenseAddedEvent;
 use App\Expense;
-use App\ExpenseType;
 use App\Rules\ExpenseCategoryCheck;
 use App\Services\Expense\ExpenseService;
 use Illuminate\Http\Request;

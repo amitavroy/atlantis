@@ -1,6 +1,7 @@
 <template>
   <div class="expense-list__wrapper">
-    <table class="table">
+    <p v-if="localExpenses.length < 1">No expenses added yet.</p>
+    <table class="table" v-if="localExpenses.length > 0">
       <thead>
         <tr>
           <th>Description</th>
@@ -11,7 +12,7 @@
       </thead>
       <tbody>
         <tr v-for="expense in localExpenses" v-bind:key="expense.id">
-          <td>{{expense.description}}</td>
+          <td class="description">{{expense.description}}</td>
           <td>
             {{expense.category}}
             <br>
