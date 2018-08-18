@@ -13,3 +13,10 @@ $factory->define(\App\Expense::class, function (Faker $faker) {
         'payment_method' => $faker->randomElement(['Cash', 'Net Banking', 'Credit Card']),
     ];
 });
+
+$factory->define(\App\ExpenseType::class, function (Faker $faker) {
+    return [
+        'family_id' => 1,
+        'name' => $faker->word,
+    ];
+});

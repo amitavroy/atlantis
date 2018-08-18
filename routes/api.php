@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('tasks/delete', 'TaskController@remove')->name('task.delete');
     Route::get('site/monitor', 'SiteMonitorController@index')->name('site-monitor.index');
+    Route::get('expenses/categories', 'CategoryController@index');
+    Route::post('expenses', 'ExpenseController@store');
 });

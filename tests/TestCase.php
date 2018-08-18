@@ -30,4 +30,14 @@ abstract class TestCase extends BaseTestCase
         $this->assertArrayHasKey($field, $response->decodeResponseJson('errors'));
     }
 
+    public function ajaxGetRequest($url, $user = null)
+    {
+        if ($user) {
+            $this->actingAs($user, 'api');
+        }
+
+        $reponse = $this->get($url, ['HTTP_X-Requested-With' => 'XMLHttpRequest']);
+
+        return $reponse;
+    }
 }

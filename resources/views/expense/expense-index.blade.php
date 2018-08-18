@@ -26,6 +26,7 @@
                     <p><a class="btn btn-primary icon-btn" href=""><i class="fa fa-plus"></i>Add Item	</a></p>
                 </div>
                 <div class="tile-body">
+                    <expense-add></expense-add>
                     <table class="table">
                         <thead>
                         <tr>
