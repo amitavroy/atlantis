@@ -28,9 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/profile', 'ProfileController@save')->name('profile.save');
 
     /*Expenses URLs*/
-    Route::get('/expenses', 'ExpenseController@index')->name('expense.index');
-});
-
-Route::get('query', function () {
-    return \Illuminate\Support\Facades\DB::table('expenses')->get();
+    Route::get('/personal/expenses', 'ExpenseController@index')->name('expense.index');
+    Route::get('/personal/expense/stats', 'ExpenseController@stats')->name('expense.stats');
 });

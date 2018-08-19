@@ -6,8 +6,10 @@ use App\Events\Expense\ExpenseAddedEvent;
 use App\Expense;
 use App\Rules\ExpenseCategoryCheck;
 use App\Services\Expense\ExpenseService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 
 class ExpenseController extends Controller
@@ -78,5 +80,25 @@ class ExpenseController extends Controller
         Event::dispatch(new ExpenseAddedEvent($expense));
 
         return response()->json($expenseCreated, 201);
+    }
+
+    public function stats(ExpenseService $expService)
+    {
+        $stats = Cache::rememberForever('expStats.' . Auth::user()->family_id, function () use ($expService) {
+
+            $months = [
+                Carbon::now()->format('Y-m'),
+                Carbon::now()->subMonth(1)->format('Y-m'),
+                Carbon::now()->subMonth(2)->format('Y-m'),
+            ];
+
+            return [
+                'month-wise' => $expService->monthWiseExpenseSum(),
+                'category-wise' => $expService->categoryWiseMonthExpense($months),
+            ];
+        });
+
+        return view('expense.expense-stats')
+            ->with('stats', $stats);
     }
 }
