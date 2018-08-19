@@ -33,4 +33,23 @@ describe('Expense list', () => {
 
     expect(wrapper.html()).toContain('No expenses added yet.');
   });
+
+  it('shows the entry when data is emitted', () => {
+    wrapper = mount(ExpenseList, {
+      propsData: {
+        expenses: [
+          {description: 'Some description', category: 'Category', payment_method: 'Cash', user: {name: 'Jhon'}, expense_amt: 420},
+          {description: 'One more', category: 'Category', payment_method: 'Cash', user: {name: 'Jhon'}, expense_amt: 500}
+        ]
+      }
+    });
+
+    let data = {
+      expense: {description: 'One more emit', category: 'Category', payment_method: 'Cash', user: {name: 'Jhon'}, expense_amt: 500}
+    };
+
+    expect(wrapper.html()).toContain('<td class="description">Some description</td>');
+    window.eventBus.$emit('expenseAdded', data);
+    expect(wrapper.html()).toContain('<td class="description">One more emit</td>');
+  });
 });

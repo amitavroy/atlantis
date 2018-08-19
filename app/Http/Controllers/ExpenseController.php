@@ -79,6 +79,8 @@ class ExpenseController extends Controller
 
         Event::dispatch(new ExpenseAddedEvent($expense));
 
+        Cache::forget('expStats.' . Auth::user()->family_id);
+
         return response()->json($expenseCreated, 201);
     }
 
