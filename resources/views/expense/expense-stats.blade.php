@@ -23,8 +23,8 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-4">
+    <div class="row equal-height">
+        <div class="col-md-4 eq-col">
             <div class="tile">
                 <div class="tile-title-w-btn">
                     <h3 class="title">Month wise Expense</h3>
@@ -57,42 +57,67 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 eq-col">
             <div class="tile">
                 <div class="tile-title-w-btn">
                     <h3 class="title">Category wise expense</h3>
                 </div>
                 <div class="tile-body">
-                    @foreach($stats['category-wise'] as $key => $row)
-                        <h6>{{$key}}</h6>
-                        <table class="table table-hover">
-                            <tr>
-                                <td>Category</td>
-                                <td>Total</td>
-                            </tr>
-                            @foreach($row as $exp)
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Category</td>
+                            <td>Total</td>
+                        </tr>
+                        @foreach($stats['category-wise'][\Carbon\Carbon::now()->format('Y-m')] as $exp)
                             <tr>
                                 <td>{{$exp->expCategory}}</td>
                                 <td>
                                     <small class="text-muted">Rs.</small> {{number_format($exp->total, 2, '.', ',')}}
                                 </td>
                             </tr>
-                            @endforeach
-                        </table>
-                    @endforeach
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 eq-col">
             <div class="tile">
                 <div class="tile-title-w-btn">
-                    <h3 class="title"></h3>
+                    <h3 class="title">Data will come</h3>
                 </div>
                 <div class="tile-body">
 
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row equal-height">
+        @foreach($stats['category-wise'] as $key => $row)
+        <div class="col-md-4 eq-col">
+            <div class="tile">
+                <div class="tile-title-w-btn">
+                    <h3 class="title">Category / {{$key}}</h3>
+                </div>
+                <div class="tile-body">
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Category</td>
+                            <td>Total</td>
+                        </tr>
+                        @foreach($row as $exp)
+                            <tr>
+                                <td>{{$exp->expCategory}}</td>
+                                <td>
+                                    <small class="text-muted">Rs.</small> {{number_format($exp->total, 2, '.', ',')}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
 @endsection

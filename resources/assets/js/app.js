@@ -6,6 +6,7 @@
 
 require('./global/appReady');
 require('./bootstrap');
+require('./utils/globalUtils');
 require('vuejs-confirm-directive');
 
 window.Vue = require('vue');
