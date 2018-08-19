@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-    <div class="row equal-height">
+    <div class="row">
         <div class="col-md-4 eq-col">
             <div class="tile">
                 <div class="tile-title-w-btn">
@@ -93,7 +93,7 @@
         </div>
     </div>
 
-    <div class="row equal-height">
+    <div class="row">
         @foreach($stats['category-wise'] as $key => $row)
         <div class="col-md-4 eq-col">
             <div class="tile">
