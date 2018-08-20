@@ -30,4 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*Expenses URLs*/
     Route::get('/personal/expenses', 'ExpenseController@index')->name('expense.index');
     Route::get('/personal/expense/stats', 'ExpenseController@stats')->name('expense.stats');
+
+    /*Galleries and Images URLs*/
+    Route::get('/personal/gallery', 'GalleryController@index')->name('gallery.index');
 });

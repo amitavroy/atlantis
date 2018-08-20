@@ -27,7 +27,7 @@ class ExpenseTest extends TestCase
     {
         $this->get(route('expense.index'))
             ->assertRedirect('/login')
-            ->status(304);
+            ->status(302);
     }
 
     /** @test */
