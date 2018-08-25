@@ -15,6 +15,16 @@ class GalleryController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $galleries->map(function ($gallery) {
+            $gallery['slug'] = $gallery->slug;
+            return $gallery;
+        });
+
         return view('gallery.gallery-index')->with('galleries', $galleries);
+    }
+
+    public function view(Gallery $gallery)
+    {
+        return $gallery;
     }
 }

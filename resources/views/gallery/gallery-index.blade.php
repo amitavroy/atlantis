@@ -20,16 +20,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @foreach($galleries as $gallery)
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$gallery->name}}</h5>
-                        <p class="card-text">{{$gallery->description}}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            @endforeach
+            <gallery-list :galleries="{{json_encode($galleries)}}"></gallery-list>
         </div>
     </div>
 @endsection

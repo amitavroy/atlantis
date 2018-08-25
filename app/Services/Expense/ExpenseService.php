@@ -32,7 +32,7 @@ class ExpenseService
         return $collection;
     }
 
-    public function monthWiseExpenseSum($limit = 3)
+    public function monthWiseExpenseSum($limit = 4)
     {
         return DB::table('expenses')
             ->select(
@@ -63,7 +63,7 @@ class ExpenseService
             $query->orHaving('transDate', $months);
         }
 
-        $query->orderBy('e.transaction_date', 'desc');
+        $query->orderBy('total', 'desc');
 
         $data = $query->get();
 

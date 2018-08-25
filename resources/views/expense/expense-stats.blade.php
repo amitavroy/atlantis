@@ -68,14 +68,16 @@
                             <td>Category</td>
                             <td>Total</td>
                         </tr>
-                        @foreach($stats['category-wise'][\Carbon\Carbon::now()->format('Y-m')] as $exp)
-                            <tr>
-                                <td>{{$exp->expCategory}}</td>
-                                <td>
-                                    <small class="text-muted">Rs.</small> {{number_format($exp->total, 2, '.', ',')}}
-                                </td>
-                            </tr>
-                        @endforeach
+                        @if(count($stats['category-wise']) > 0)
+                            @foreach($stats['category-wise'][\Carbon\Carbon::now()->format('Y-m')] as $exp)
+                                <tr>
+                                    <td>{{$exp->expCategory}}</td>
+                                    <td>
+                                        <small class="text-muted">Rs.</small> {{number_format($exp->total, 2, '.', ',')}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </table>
                 </div>
             </div>
