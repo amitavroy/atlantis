@@ -30,13 +30,13 @@ class GalleryTest extends TestCase
     /** @test */
     public function a_user_can_see_gallery_page()
     {
-        $gallery = factory(Gallery::class)->create([
+        factory(Gallery::class)->create([
             'user_id' => $this->user->id,
             'family_id' => $this->user->family_id,
             'name' => 'my gallery for test',
         ]);
 
-        $galleryOther = factory(Gallery::class)->create(['name' => 'not my gallery for test',]);
+        factory(Gallery::class)->create(['name' => 'not my gallery for test',]);
 
         $this->actingAs($this->user)
             ->get(route('gallery.index'))

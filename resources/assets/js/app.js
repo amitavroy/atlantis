@@ -19,6 +19,7 @@ Vue.component('site-monitor', require('./components/SiteMonitor.vue'));
 Vue.component('expense-add', require('./modules/Expense/ExpenseAdd.vue'));
 Vue.component('expense-list', require('./modules/Expense/ExpenseList.vue'));
 Vue.component('gallery-list', require('./modules/Gallery/GalleryList.vue'));
+Vue.component('gallery-view', require('./modules/Gallery/GalleryView.vue'));
 
 window.eventBus = new Vue({});
 

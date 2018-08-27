@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\DashboardService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,9 @@ class HomeController extends Controller
             return redirect('/');
         }
 
-        $dashData = $dashboardService->getDashboardData();
+        $dashData = Cache::rememberForever('dashStats.' . Auth::user()->family_id, function () use ($dashboardService) {
+            return $dashboardService->getDashboardData();
+        });
 
         return view('home')->with('dashData', $dashData);
     }

@@ -13,3 +13,4 @@ yarn-error.log
 .env
 .rnd
 /laravel-echo-server.json
+storage/*.pem

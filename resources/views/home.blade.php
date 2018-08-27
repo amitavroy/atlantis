@@ -19,6 +19,14 @@
             icon="fa-globe"
         ></icon-widget>
     </div>
+    <div class="col-md-3">
+        <icon-widget
+            color="danger"
+            text="Galleries"
+            count="{{$dashData['galleries']}}"
+            icon="fa-globe"
+        ></icon-widget>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-4">
