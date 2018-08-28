@@ -44,4 +44,52 @@ class GalleryTest extends TestCase
             ->assertDontSee('not my gallery for test')
             ->assertSee('My galleries');
     }
+
+    /** @test */
+    public function a_user_can_create_a_gallery()
+    {
+        $this->disableExceptionHandling();
+
+        $post = [
+            'name' => 'This is my test Gallery',
+            'description' => 'This is a simple description for my test Gallery',
+            'private' => false,
+        ];
+
+        $this->actingAs($this->user, 'api')
+            ->post(route('gallery.save'), $post)
+            ->assertStatus(201)
+            ->assertJsonFragment([
+                'name' => 'This is my test Gallery',
+                'description' => 'This is a simple description for my test Gallery',
+                'family_id' => $this->user->family_id,
+                'user_id' => $this->user->id,
+                'is_active' => 1,
+                'is_private' => false
+            ]);
+    }
+
+    /** @test */
+    public function a_user_can_create_a_private_gallery()
+    {
+        $this->disableExceptionHandling();
+
+        $post = [
+            'name' => 'This is my test Gallery',
+            'description' => 'This is a simple description for my test Gallery',
+            'private' => true,
+        ];
+
+        $this->actingAs($this->user, 'api')
+            ->post(route('gallery.save'), $post)
+            ->assertStatus(201)
+            ->assertJsonFragment([
+                'name' => 'This is my test Gallery',
+                'description' => 'This is a simple description for my test Gallery',
+                'family_id' => $this->user->family_id,
+                'user_id' => $this->user->id,
+                'is_active' => 1,
+                'is_private' => true,
+            ]);
+    }
 }

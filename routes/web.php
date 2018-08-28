@@ -33,5 +33,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     /*Galleries and Images URLs*/
     Route::get('/personal/gallery', 'GalleryController@index')->name('gallery.index');
+    Route::get('/personal/gallery/add', 'GalleryController@add')->name('gallery.add');
     Route::get('/personal/gallery/{gallery}', 'GalleryController@view')->name('gallery.view');
 });

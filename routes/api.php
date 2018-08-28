@@ -22,4 +22,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('site/monitor', 'SiteMonitorController@index')->name('site-monitor.index');
     Route::get('expenses/categories', 'CategoryController@index');
     Route::post('expenses', 'ExpenseController@store');
+    Route::post('/personal/gallery/add', 'GalleryController@store')->name('gallery.save');
 });

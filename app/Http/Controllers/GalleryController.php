@@ -42,4 +42,29 @@ class GalleryController extends Controller
 
         return view('gallery.gallery-view', compact('gallery'));
     }
+
+    public function add()
+    {
+        return view('gallery.gallery-add');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'description' => 'required|min:3|max:256',
+            'private' => 'required|boolean',
+        ]);
+
+        $gallery = Gallery::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'family_id' => Auth::user()->family_id,
+            'user_id' => Auth::user()->id,
+            'is_private' => ($request->input('private') == 'true') ? true : false,
+            'is_active' => 1,
+        ]);
+
+        return response()->json($gallery, 201);
+    }
 }
