@@ -1,6 +1,8 @@
 <template>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="https://d15dxe0kapai5v.cloudfront.net/articles/69_trip_to_harihareshwar/shrivardhan_01.jpg" alt="Card image cap">
+  <div class="card gallery-card" style="width: 18rem;">
+    <img class="card-img-top"
+         src="https://d15dxe0kapai5v.cloudfront.net/articles/69_trip_to_harihareshwar/shrivardhan_01.jpg"
+         alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{gallery.name}}</h5>
       <p><i class="fa fa-image"></i> {{count}}</p>
@@ -21,3 +23,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .gallery-card {
+    .card-img-top {
+      height: 172px;
+    }
+  }
+</style>
