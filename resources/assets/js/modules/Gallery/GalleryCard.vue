@@ -1,8 +1,10 @@
 <template>
   <div class="card gallery-card" style="width: 18rem;">
-    <img class="card-img-top"
-         v-bind:src="thumbnail"
-         alt="Card image cap">
+    <div class="gallery-card-image">
+      <img class="card-img-top"
+           v-bind:src="thumbnail"
+           alt="Card image cap">
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{gallery.name}}</h5>
       <p><i class="fa fa-image"></i> {{count}}</p>
@@ -29,8 +31,13 @@ export default {
 
 <style lang="scss">
   .gallery-card {
-    .card-img-top {
+    .gallery-card-image {
       height: 172px;
+      overflow: hidden;
+      .card-img-top {
+        max-width: 100%;
+        height: auto;
+      }
     }
   }
 </style>
