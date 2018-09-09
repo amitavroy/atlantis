@@ -14,7 +14,7 @@
         <tr v-for="expense in localExpenses" v-bind:key="expense.id">
           <td class="description">{{expense.description}}</td>
           <td>
-            {{expense.category}}
+            {{expense.category.name}}
             <br>
             <small class="text-muted">{{expense.payment_method}}</small>
           </td>

@@ -21,6 +21,46 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
+                <div class="tile-body">
+                    <form action="{{route('expense.index')}}" method="get" class="form-inline">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Category</div>
+                            </div>
+                            <select name="cat" class="form-control">
+                                <option value="">SELECT</option>
+                                @foreach($expenseTypes as $expenseType)
+                                    <option value="{{$expenseType->name}}"
+                                        {{(request()->has('cat') && request('cat') == $expenseType->name) ? 'selected' : ''}}
+                                    >
+                                        {{$expenseType->name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Method</div>
+                            </div>
+                            <select name="type" class="form-control">
+                                <option value="">SELECT</option>
+                                <option value="Cash" {{(request()->has('type') && request('type') == 'Cash') ? 'selected' : ''}}>Cash</option>
+                                <option value="Net Banking" {{(request()->has('type') && request('type') == 'Net Banking') ? 'selected' : ''}}>Net Banking</option>
+                                <option value="Credit Card" {{(request()->has('type') && request('type') == 'Credit Card') ? 'selected' : ''}}>Credit Card</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-success mr-2">Filter</button>
+                        <a href="{{route('expense.index')}}" class="btn btn-primary">Reset</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
                 <div class="tile-title-w-btn">
                     <h3 class="title"></h3>
                     <p>

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Events\Expense\ExpenseAddedEvent;
 use App\Expense;
 use App\ExpenseType;
+use App\Services\Expense\ExpenseService;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -141,16 +142,102 @@ class ExpenseTest extends TestCase
 
         $this->saveExpense($this->user, $category);
     }
-
-    private function saveExpense($user, $category)
+    
+    /** @test */
+    public function a_category_filter_shows_only_those_items()
     {
-        $postData = [
-            'description' => 'Some expense description',
+        $categoryA = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Test',
+        ]);
+
+        $categoryB = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Best',
+        ]);
+
+        $this->saveExpense($this->user, $categoryA, [
+            'description' => 'Some expense description one',
             'transaction_date' => '2018-07-31',
             'amount' => 465,
-            'category' => $category->name,
+            'category' => $categoryA->name,
             'type' => 'Cash'
-        ];
+        ]);
+
+        $this->saveExpense($this->user, $categoryB, [
+            'description' => 'Some expense description two',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $categoryB->name,
+            'type' => 'Cash'
+        ]);
+
+        $expenseService = new ExpenseService;
+        $expenseTypes = $expenseService->getUserFamilyExpenseType();
+        $conditions = collect(['cat' => 'Test', 'type' => 'Cash']);
+        $expense = $expenseService->getFilteredExpenses($conditions, $expenseTypes);
+
+        $data = $expense->toArray()['data'];
+        $this->assertEquals(1, count($data));
+        $this->assertEquals('Some expense description one', $data[0]['description']);
+    }
+
+    /** @test */
+    public function a_payment_method_filter_shows_only_those_items()
+    {
+        $categoryA = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Test',
+        ]);
+
+        $this->saveExpense($this->user, $categoryA, [
+            'description' => 'Some expense description one',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $categoryA->name,
+            'type' => 'Cash'
+        ]);
+
+        $this->saveExpense($this->user, $categoryA, [
+            'description' => 'Some expense description two',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $categoryA->name,
+            'type' => 'Credit Card'
+        ]);
+
+        $this->saveExpense($this->user, $categoryA, [
+            'description' => 'Some expense description three',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $categoryA->name,
+            'type' => 'Credit Card'
+        ]);
+
+        $expenseService = new ExpenseService;
+        $expenseTypes = $expenseService->getUserFamilyExpenseType();
+        $conditions = collect(['cat' => 'Test', 'type' => 'Credit Card']);
+        $expense = $expenseService->getFilteredExpenses($conditions, $expenseTypes);
+
+        $data = $expense->toArray()['data'];
+        $this->assertEquals(2, count($data));
+        $this->assertEquals('Some expense description three', $data[0]['description']);
+        $this->assertEquals('Some expense description two', $data[1]['description']);
+    }
+
+    private function saveExpense($user, $category, $expenseData = null)
+    {
+        $postData = $expenseData;
+
+        if ($expenseData === null) {
+            $postData = [
+                'description' => 'Some expense description',
+                'transaction_date' => '2018-07-31',
+                'amount' => 465,
+                'category' => $category->name,
+                'type' => 'Cash'
+            ];
+        }
 
         return $this->actingAs($user, 'api')
             ->post('/api/expenses', $postData);

@@ -19,6 +19,7 @@ class GalleryController extends Controller
 
         $galleries->map(function ($gallery) {
             $gallery['slug'] = $gallery->slug;
+            $gallery['thumbnail'] = $gallery->getFeaturedImage($gallery);
             return $gallery;
         });
 

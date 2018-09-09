@@ -12,4 +12,9 @@ class Expense extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(ExpenseType::class, 'expense_type_id');
+    }
 }

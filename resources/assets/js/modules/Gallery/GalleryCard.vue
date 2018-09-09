@@ -1,7 +1,7 @@
 <template>
   <div class="card gallery-card" style="width: 18rem;">
     <img class="card-img-top"
-         src="https://d15dxe0kapai5v.cloudfront.net/articles/69_trip_to_harihareshwar/shrivardhan_01.jpg"
+         v-bind:src="thumbnail"
          alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{gallery.name}}</h5>
@@ -19,6 +19,9 @@ export default {
   computed: {
     count() {
       return (this.gallery.photos && this.gallery.photos.length) ? this.gallery.photos.length : 0;
+    },
+    thumbnail() {
+      return (this.gallery.thumbnail.thumb) ? this.gallery.thumbnail.thumb : 'https://d15dxe0kapai5v.cloudfront.net/articles/69_trip_to_harihareshwar/shrivardhan_01.jpg'
     }
   }
 }

@@ -7,11 +7,12 @@ use App\Events\Task\TaskDeletedEvent;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     private $user;
 

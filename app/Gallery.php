@@ -2,11 +2,18 @@
 
 namespace App;
 
+use App\Traits\AlbumTraits;
 use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
+    use AlbumTraits;
+
     protected $guarded = [];
+
+    protected $casts = [
+        'meta_data' => 'array',
+    ];
 
     public function getSlugAttribute()
     {

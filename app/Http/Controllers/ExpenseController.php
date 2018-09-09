@@ -28,15 +28,13 @@ class ExpenseController extends Controller
         $this->expenseService = $expenseService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $expenseTypes = $this->expenseService->getUserFamilyExpenseType();
 
-        $expenses = Expense::with('user')
-            ->where('family_id', Auth::user()->family_id)
-            ->orderBy('transaction_date', 'desc')
-            ->orderBy('id', 'desc')
-            ->paginate(20);
+        $conditions = collect($request->all());
+
+        $expenses = $this->expenseService->getFilteredExpenses($conditions, $expenseTypes);
 
         $viewData = $this->expenseService->expensesForView($expenses, $expenseTypes);
 

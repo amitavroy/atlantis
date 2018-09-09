@@ -9,8 +9,14 @@ describe('Gallery list component', () => {
     wrapper = mount(GalleryList, {
       propsData: {
         galleries: [
-          {description: 'This is my first gallery.', name: 'First gallery', id:  1, slug: 'http://demo.com'},
-          {description: 'This is my second gallery.', name: 'Second gallery', id:  2}
+          {description: 'This is my first gallery.', name: 'First gallery', id:  1, slug: 'http://demo.com', thumbnail: {
+              thumb: 'http://someimageurl.jpg'
+            }
+          },
+          {description: 'This is my second gallery.', name: 'Second gallery', id:  2, thumbnail: {
+              thumb: 'http://someimageurl.jpg'
+            }
+          }
         ]
       }
     });
@@ -27,7 +33,15 @@ describe('Gallery list component', () => {
     wrapper = mount(GalleryList, {
       propsData: {
         galleries: [
-          {description: 'This is my first gallery.', name: 'First gallery', id:  1, slug: 'http://demo.com'}
+          {
+            description: 'This is my first gallery.',
+            name: 'First gallery',
+            id:  1,
+            slug: 'http://demo.com',
+            thumbnail: {
+              thumb: 'http://someimageurl.jpg'
+            }
+          }
         ]
       }
     });
