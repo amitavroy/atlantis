@@ -42,6 +42,11 @@
                         <i class="icon fa fa-circle-o"></i> Gallery add
                     </a>
                 </li>
+                <li>
+                    <a class="treeview-item {{Route::is('document.index') ? 'active' : ''}}" href="{{route('document.index')}}">
+                        <i class="icon fa fa-circle-o"></i> My Documents
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
