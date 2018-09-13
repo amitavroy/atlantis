@@ -9,6 +9,8 @@ require('./bootstrap');
 require('./utils/globalUtils');
 require('vuejs-confirm-directive');
 
+import store from './store'
+
 window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
@@ -21,11 +23,12 @@ Vue.component('expense-list', require('./modules/Expense/ExpenseList.vue'));
 Vue.component('gallery-list', require('./modules/Gallery/GalleryList.vue'));
 Vue.component('gallery-view', require('./modules/Gallery/GalleryView.vue'));
 Vue.component('gallery-add', require('./modules/Gallery/GalleryAddCard.vue'));
+Vue.component('document-group', require('./modules/Document/DocumentGroup.vue'));
 
 window.eventBus = new Vue({});
 
 require('./socketEvents');
 
 const app = new Vue({
-  el: '#app'
+  el: '#app', store
 });

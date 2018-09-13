@@ -1,0 +1,9 @@
+Document Manager
+- need to use Store
+- this will be an SPA
+
+Components
+- Directory Panel
+    - Folder component
+    - File component
+    - Upload component

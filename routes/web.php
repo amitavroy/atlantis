@@ -35,4 +35,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/personal/gallery', 'GalleryController@index')->name('gallery.index');
     Route::get('/personal/gallery/add', 'GalleryController@add')->name('gallery.add');
     Route::get('/personal/gallery/{gallery}', 'GalleryController@view')->name('gallery.view');
+
+    Route::view('/personal/documents', 'documents.document-index')->name('document.index');
+});
+
+Route::get('test-s3', function () {
+    return [
+        'directories' => \Illuminate\Support\Facades\Storage::disk('s3')->directories('/albums'),
+        'files' => \Illuminate\Support\Facades\Storage::disk('s3')->file('/'),
+    ];
 });

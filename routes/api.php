@@ -23,4 +23,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('expenses/categories', 'CategoryController@index');
     Route::post('expenses', 'ExpenseController@store');
     Route::post('/personal/gallery/add', 'GalleryController@store')->name('gallery.save');
+    Route::post('/document/list', 'DocumentController@index')->name('document.index');
+    Route::get('/document/download', 'DocumentController@view')->name('document.download');
 });
