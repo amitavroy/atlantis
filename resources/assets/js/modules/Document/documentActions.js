@@ -1,11 +1,13 @@
 import axios from 'axios';
 import docStore from './documentStore';
+import LocalDB from './../../utils/LocalDB';
 
 export const actions = {
   getFolderStructure: ({commit}, path) => {
     commit('SET_NAVIGATION', path);
     return axios.post('/api/document/list', {path: path}).then(response => {
       commit('SET_DIRECTORIES', response.data);
+      LocalDB.setData('lastPath', path);
       return response
     });
   },

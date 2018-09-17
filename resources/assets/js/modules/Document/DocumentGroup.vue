@@ -23,6 +23,7 @@
   import DocumentFolder from './DocumentFolder.vue';
   import DocumentFile from './DocumentFile.vue';
   import DocumentBreadcrumb from './DocumentBreadcrumb.vue';
+  import LocalDB from './../../utils/LocalDB';
 
   export default {
     components: {
@@ -34,7 +35,10 @@
       })
     },
     created() {
-      this.$store.dispatch('getFolderStructure', '').then(response => {
+      let path = '';
+      path = (LocalDB.getData('lastPath')) ? LocalDB.getData('lastPath') : '';
+
+      this.$store.dispatch('getFolderStructure', path).then(response => {
         this.loading = false
       });
 

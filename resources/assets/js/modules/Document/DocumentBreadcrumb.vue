@@ -23,8 +23,7 @@
     },
     methods: {
       handleCrumbClick(crumb) {
-        let path = this.documentStore.folders.path;
-        let arrApth = path.split('/');
+        let arrApth = this.documentStore.folders.path.split('/');
         let url = '';
         for (let i = 0; i <= crumb; i++) {
           url = url + arrApth[i] + '/';
