@@ -1,6 +1,8 @@
 <template>
   <div class="document-group__wrapper">
     <top-drawer></top-drawer>
+    <document-breadcrumb
+      v-on:folderSelected="handleFolderSelected"></document-breadcrumb>
     <ul class="list-group" v-if="!loading">
       <document-folder
         v-on:folderSelected="handleFolderSelected"
@@ -20,10 +22,11 @@
   import TopDrawer from './TopDrawer.vue';
   import DocumentFolder from './DocumentFolder.vue';
   import DocumentFile from './DocumentFile.vue';
+  import DocumentBreadcrumb from './DocumentBreadcrumb.vue';
 
   export default {
     components: {
-      DocumentFolder, TopDrawer, DocumentFile
+      DocumentFolder, TopDrawer, DocumentFile, DocumentBreadcrumb
     },
     computed: {
       ...mapState({
