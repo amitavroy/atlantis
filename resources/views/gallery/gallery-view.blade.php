@@ -28,7 +28,7 @@
             <div class="well">
                 <div class="tile">
                     <div class="tile-body">
-                        <gallery-view :images="{{json_encode($gallery->photos)}}"></gallery-view>
+                        <gallery-view :images="{{json_encode($gallery->photos)}}" :gallery-id={{$gallery->id}}></gallery-view>
                     </div>
                 </div>
             </div>
