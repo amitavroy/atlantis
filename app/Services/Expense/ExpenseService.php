@@ -4,6 +4,7 @@ namespace App\Services\Expense;
 
 use App\Expense;
 use App\ExpenseType;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -61,8 +62,9 @@ class ExpenseService
             ->groupBy('transDate')
             ->groupBy('expCategory');
 
+//        $query->orHaving('transDate', $months);
         foreach ($months as $month) {
-            $query->orHaving('transDate', $months);
+            $query->orHaving('transDate', $month);
         }
 
         $query->orderBy('total', 'desc');
@@ -75,6 +77,17 @@ class ExpenseService
         }
 
         return $monthWise;
+    }
+
+    public function paymentMethodsWiseSum()
+    {
+        $date = Carbon::now();
+        $string = "{$date->year}-{$date->month}-01 00:00:00";
+        $query = DB::table('expenses');
+        $query->select(DB::raw('SUM(amount) as total, payment_method'));
+        $query->where('created_at', '>', $string);
+        $query->groupBy('payment_method');
+        return $query->get();
     }
 
     public function getFilteredExpenses(Collection $conditions, $expenseTypes)

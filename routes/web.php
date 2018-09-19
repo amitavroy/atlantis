@@ -40,8 +40,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('test-s3', function () {
-    return [
-        'directories' => \Illuminate\Support\Facades\Storage::disk('s3')->directories('/albums'),
-        'files' => \Illuminate\Support\Facades\Storage::disk('s3')->file('/'),
-    ];
+
 });

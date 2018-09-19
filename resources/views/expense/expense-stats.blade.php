@@ -65,10 +65,10 @@
                 <div class="tile-body">
                     <table class="table table-hover">
                         <tr>
-                            <td>Category</td>
-                            <td>Total</td>
+                            <td><strong>Category</strong></td>
+                            <td><strong>Total</strong></td>
                         </tr>
-                        @if(count($stats['category-wise']) > 0)
+                        @if(count($stats['category-wise']) > 0 && isset($stats['category-wise'][\Carbon\Carbon::now()->format('Y-m')]))
                             @foreach($stats['category-wise'][\Carbon\Carbon::now()->format('Y-m')] as $exp)
                                 <tr>
                                     <td>{{$exp->expCategory}}</td>
@@ -89,7 +89,20 @@
                     <h3 class="title">Data will come</h3>
                 </div>
                 <div class="tile-body">
-
+                    <table class="table table-hover">
+                        <tr>
+                            <td><strong>Category</strong></td>
+                            <td><strong>Total</strong></td>
+                        </tr>
+                        @if(count($stats['method-wise']) > 0 && isset($stats['method-wise']))
+                            @foreach($stats['method-wise'] as $row)
+                                <tr>
+                                    <td>{{$row->payment_method}}</td>
+                                    <td>{{number_format($row->total, 2, '.', ',')}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </table>
                 </div>
             </div>
         </div>

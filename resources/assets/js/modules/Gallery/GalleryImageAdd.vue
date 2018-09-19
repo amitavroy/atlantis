@@ -1,12 +1,12 @@
 <template>
   <div class="mb-3">
-    <button class="btn btn-success mb-2" v-on:click="handleButtonClick">Add Images</button>
-    <form v-on:submit.prevent="handleFormSubmit" v-show="showAddForm">
+    <button class="btn btn-success mb-2" v-on:click="handleButtonClick" id="add-image">Add Images</button>
+    <form v-on:submit.prevent="handleFormSubmit" v-if="showAddForm">
         <textarea name="images"
             id="images"
             class="form-control mb-2"
             v-model="imageText" rows="5"></textarea>
-      <button class="btn btn-success">Save</button>
+      <button class="btn btn-success">Save images</button>
     </form>
   </div>
 </template>

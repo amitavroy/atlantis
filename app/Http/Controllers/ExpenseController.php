@@ -95,6 +95,7 @@ class ExpenseController extends Controller
             return [
                 'month-wise' => $expService->monthWiseExpenseSum(),
                 'category-wise' => $expService->categoryWiseMonthExpense($months),
+                'method-wise' => $expService->paymentMethodsWiseSum(),
             ];
         });
 
