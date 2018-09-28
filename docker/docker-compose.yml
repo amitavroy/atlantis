@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  php:
+    container_name: ${APP_NAME}_web_server
+    build:
+      context: ./php
+    ports:
+      - "9000:80"
+    volumes:
+      - ./../:/var/www/app
+
+  mariadb:
+    container_name: ${APP_NAME}_db_server
+    build: ./mariadb
+    ports:
+      - "33060:3306"
+    volumes:
+      - ${DATA_PATH_HOST}/mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=prime
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret-pwd
+
+  redis:
+    container_name: ${APP_NAME}_cache_server
+    image: redis:4.0.11
+
+  node:
+    container_name: ${APP_NAME}_node_server
+    build: ./node
+    volumes:
+      - ./../:/var/www/app

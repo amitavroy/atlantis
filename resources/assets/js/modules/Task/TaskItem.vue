@@ -1,7 +1,8 @@
 <template>
-  <li class="list-group-item description"
-      @mouseover="handleMouseOver" @mouseout="handleMouseOut">
-    {{description}}
+  <li class="list-group-item description cursor"
+      @mouseover="handleMouseOver"
+      @mouseout="handleMouseOut">
+    <i class="fa fa-plus mr-2" @click="handleTaskClick"></i> {{description}}
     <span class="float-right done cursor"
       v-if="displayExtras"
       v-confirm.reload="{
@@ -12,6 +13,16 @@
       }">
       Done
     </span>
+    <div v-if="showModal" class="mt-3">
+      <form v-on:submit.prevent="handleSubmit">
+        <input type="text" class="form-control" placeholder="Enter comment" v-model="commentText">
+      </form>
+      <ul class="list-group">
+        <li class="list-group-item" v-for="comment in comments" :key="comment.id">
+          <i class="fa fa-arrow-right"></i> {{comment.comment}}
+        </li>
+      </ul>
+    </div>
   </li>
 </template>
 
@@ -21,10 +32,24 @@
   export default {
     props: ['description', 'id'],
 
-    data () {
+    data() {
       return {
-        displayExtras: false
+        displayExtras: false,
+        showModal: false,
+        commentText: '',
+        comments: []
       }
+    },
+
+    created() {
+      this.comments.push({
+        "id": 1,
+        "comment": "This is some comment"
+      });
+      this.comments.push({
+        "id": 2,
+        "comment": "This is one more comment"
+      });
     },
 
     methods: {
@@ -38,6 +63,16 @@
         if (response.status === 200) {
           window.eventBus.$emit('eventTaskDeleted', this.id);
         }
+      },
+      handleTaskClick() {
+        this.showModal = !this.showModal;
+      },
+      handleSubmit() {
+        this.comments.unshift({
+          "id": this.comments.length + 1,
+          "comment": this.commentText
+        });
+        this.commentText = '';
       }
     }
   }

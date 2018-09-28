@@ -11,7 +11,7 @@ describe('Gallery add component', () => {
     expect(wrapper.html()).toContain('Add Images');
   });
 
-  it.only('shows form when button is clicked', () => {
+  it('shows form when button is clicked', () => {
     wrapper = mount(GalleryImageAdd);
     let button = wrapper.find('#add-image');
     button.trigger('click');
