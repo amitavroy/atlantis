@@ -13,43 +13,26 @@
       }">
       Done
     </span>
-    <div v-if="showModal" class="mt-3">
-      <form v-on:submit.prevent="handleSubmit">
-        <input type="text" class="form-control" placeholder="Enter comment" v-model="commentText">
-      </form>
-      <ul class="list-group">
-        <li class="list-group-item" v-for="comment in comments" :key="comment.id">
-          <i class="fa fa-arrow-right"></i> {{comment.comment}}
-        </li>
-      </ul>
-    </div>
+    <task-comments :show="showModal"></task-comments>
   </li>
 </template>
 
 <script>
   import VueConfirm from 'vuejs-confirm-directive';
+  import TaskComments from './TaskComments.vue';
 
   export default {
     props: ['description', 'id'],
 
+    components: {
+      TaskComments
+    },
+
     data() {
       return {
         displayExtras: false,
-        showModal: false,
-        commentText: '',
-        comments: []
+        showModal: false
       }
-    },
-
-    created() {
-      this.comments.push({
-        "id": 1,
-        "comment": "This is some comment"
-      });
-      this.comments.push({
-        "id": 2,
-        "comment": "This is one more comment"
-      });
     },
 
     methods: {
@@ -66,13 +49,6 @@
       },
       handleTaskClick() {
         this.showModal = !this.showModal;
-      },
-      handleSubmit() {
-        this.comments.unshift({
-          "id": this.comments.length + 1,
-          "comment": this.commentText
-        });
-        this.commentText = '';
       }
     }
   }

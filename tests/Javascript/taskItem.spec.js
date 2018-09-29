@@ -20,7 +20,6 @@ describe('Task item', () => {
 
   it('Shows the done button on mouse over', () => {
     wrapper.trigger('mouseover');
-
     expect(wrapper.find('.done').text()).toBe('Done');
   });
 
