@@ -17,7 +17,7 @@ class TaskController extends Controller
         $tasks = Task::where(function ($query) {
             $query->where('is_complete', 0);
             $query->where('user_id', Auth::user()->id);
-        })->orderBy('created_at', 'desc')->get();
+        })->with('comments')->orderBy('created_at', 'desc')->get();
 
         return view('task.task-index')->with('tasks', $tasks);
     }

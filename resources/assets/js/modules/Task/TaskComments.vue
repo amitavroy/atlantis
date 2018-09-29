@@ -5,7 +5,7 @@
     </form>
     <ul class="list-group">
       <li class="list-group-item" v-for="comment in comments" :key="comment.id">
-        <i class="fa fa-arrow-right"></i> {{comment.comment}}
+        <i class="fa fa-arrow-right"></i> {{comment.body}}
       </li>
     </ul>
   </div>
@@ -15,7 +15,7 @@
   import axios from 'axios';
 
   export default {
-    props: ['show'],
+    props: ['show', 'taskId', 'parentComments'],
 
     data() {
       return {
@@ -25,19 +25,13 @@
     },
 
     created() {
-      this.comments.push({
-        "id": 1,
-        "comment": "This is some comment"
-      });
-      this.comments.push({
-        "id": 2,
-        "comment": "This is one more comment"
-      });
+      this.comments = this.parentComments;
     },
 
     methods: {
       handleSubmit() {
-        let postData = {'comment': this.commentText};
+        let postData = {'comment': this.commentText, 'task_id': this.taskId};
+
         axios.post('/api/tasks/comment', postData).then(({data}) => {
           this.comments.unshift(data);
           this.commentText = '';

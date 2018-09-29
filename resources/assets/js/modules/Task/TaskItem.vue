@@ -2,7 +2,7 @@
   <li class="list-group-item description cursor"
       @mouseover="handleMouseOver"
       @mouseout="handleMouseOut">
-    <i class="fa fa-plus mr-2" @click="handleTaskClick"></i> {{description}}
+    <i class="fa mr-2" @click="handleTaskClick" v-bind:class="iconClass"></i>({{commentCount}}) {{description}}
     <span class="float-right done cursor"
       v-if="displayExtras"
       v-confirm.reload="{
@@ -13,7 +13,7 @@
       }">
       Done
     </span>
-    <task-comments :show="showModal"></task-comments>
+    <task-comments :show="showModal" :task-id="id" :parent-comments="comments"></task-comments>
   </li>
 </template>
 
@@ -22,7 +22,7 @@
   import TaskComments from './TaskComments.vue';
 
   export default {
-    props: ['description', 'id'],
+    props: ['description', 'id', 'comments'],
 
     components: {
       TaskComments
@@ -31,7 +31,14 @@
     data() {
       return {
         displayExtras: false,
-        showModal: false
+        showModal: false,
+        commentCount: (this.comments) ? this.comments.length : 0
+      }
+    },
+
+    computed: {
+      iconClass() {
+        return (this.showModal == false) ? 'fa-plus' : 'fa-minus';
       }
     },
 

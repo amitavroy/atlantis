@@ -23,6 +23,7 @@
           <task-item
             v-for="task in localTasks"
             :description="task.description"
+            :comments="task.comments"
             :id="task.id"
             :key="task.id"
           ></task-item>

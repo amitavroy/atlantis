@@ -12,10 +12,11 @@ describe('Task item', () => {
 
   it('Shows the task description', () => {
     wrapper.setProps({
-      description: 'This is my task'
+      description: 'This is my task',
+      comments: []
     });
 
-    expect(wrapper.find('.description').text()).toBe('This is my task');
+    expect(wrapper.find('.description').text()).toBe('(0) This is my task');
   });
 
   it('Shows the done button on mouse over', () => {

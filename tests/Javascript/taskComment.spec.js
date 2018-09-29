@@ -1,7 +1,6 @@
 import {mount} from '@vue/test-utils';
 import TaskComment from './../../resources/assets/js/modules/Task/TaskComments.vue';
 import expect from 'expect';
-import axios from 'axios';
 import moxios from 'moxios';
 
 describe('Task comments', () => {
@@ -23,8 +22,8 @@ describe('Task comments', () => {
 
     wrapper.setData({
       comments: [
-        {'id': 1, 'comment': 'This is my first comment'},
-        {'id': 2, 'comment': 'This is my second comment'}
+        {'id': 1, 'body': 'This is my first comment'},
+        {'id': 2, 'body': 'This is my second comment'}
       ]
     });
 
@@ -46,7 +45,7 @@ describe('Task comments', () => {
 
     moxios.stubRequest('/api/tasks/comment', {
       status: 200,
-      response: {id: 3, comment: 'This is a new comment'}
+      response: {id: 3, body: 'This is a new comment'}
     });
 
     moxios.wait(() => {
