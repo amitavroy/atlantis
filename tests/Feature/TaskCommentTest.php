@@ -21,13 +21,6 @@ class TaskCommentTest extends TestCase
     }
 
     /** @test */
-    public function guest_cannot_add_task_comment()
-    {
-        $this->post(route('task-comment.add'), [])
-            ->assertRedirect('/login');
-    }
-
-    /** @test */
     public function a_user_can_comment_on_a_task()
     {
         $task = factory(Task::class)->create();
