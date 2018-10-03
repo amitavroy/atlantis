@@ -34,7 +34,9 @@
 
 <script>
   import _ from 'lodash';
+  import moment from 'moment';
   import vSelect from 'vue-select';
+  import axios from 'axios';
   export default {
     components: {
       'v-select': vSelect
@@ -60,7 +62,7 @@
       setEmptyDescription() {
         return {
           description: '',
-          transaction_date: '',
+          transaction_date: moment().format('YYYY-MM-DD'),
           amount: '',
           type: '',
           category: ''
