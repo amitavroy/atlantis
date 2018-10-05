@@ -4,9 +4,14 @@ This is an application which I will use for many of my day to day activity. It h
 
 ## Features
 1. Added the [Vali theme](https://pratikborsadiya.in/vali-admin/) to the project.
-2. Tasks - This is a way for me to keep a track of things that I need to do and things which are pending.
+
+2. Tasks - This is a way for me to keep a track of things that I need to do and things which are pending along with comments for each tasks.
+
 3. Site Monitoring - A module which I use to monitor the uptime of my sites. A simple code which runs every minute and call the site urls and records the time. If the previous time is more than 30% of the average then an email is sent to the mentioned email address.
+
 4. Expense capturing - This application is also used to capture expense. There are categories of expense which is unique to a family and based on that a User in that family can add expenses. And then there are certain reports available to the User like month wise total expense, category wise data etc.
+
+5. Document management - Using S3 bucket, I can manage my documents. I can view the files on the S3 bucket. [NOTE: WIP - more features to come]
 
 ## Installation
 The process to install and run this application are mentioned below. Note that this is primarily for development version and if you want to deploy this kind of an app on any server, there are certain things which you need to secure like Laravel Echo Server keys, ports for running the socket connection, run the server in production mode and few more things.
