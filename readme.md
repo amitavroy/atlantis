@@ -1,5 +1,7 @@
 # Atlantis
 
+![Build Status](https://img.shields.io/travis/amitavroy/atlantis.svg)
+
 This is an application which I will use for many of my day to day activity. It has many modules which are listed below:
 
 ## Features
