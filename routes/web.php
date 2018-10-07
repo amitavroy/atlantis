@@ -40,7 +40,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('test', function () {
-    $data = new \App\Services\Expense\DailyExpenseSummary();
-    $data = $data->handle();
-    return new \App\Mail\ApplicationSummaryMail($data);
+    
 });

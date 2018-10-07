@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('site:summary')
             ->timezone('Asia/Kolkata')
-            ->at('14:33');
+            ->at('15:16');
     }
 
     /**
