@@ -11,7 +11,7 @@ class DailyExpenseSummary
     {
         $yesterday = Carbon::yesterday();
 
-        $expenses = Expense::where('expenses.created_at', '>', $yesterday)
+        $expenses = Expense::where('expenses.transaction_date', '>', $yesterday)
             ->with('category')
             ->get();
 
