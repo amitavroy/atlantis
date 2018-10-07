@@ -1,6 +1,6 @@
 
 // Fonts
-//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
 
 // Variables
 //@import "variables";
@@ -9,6 +9,12 @@
 //@import '~bootstrap/scss/bootstrap';
 
 @import "theme";
+
+@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,600");
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Nunito";
+}
 
 .navbar-laravel {
   background-color: #fff;

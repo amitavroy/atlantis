@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('/personal/documents', 'documents.document-index')->name('document.index');
 });
 
-Route::get('test-s3', function () {
-
+Route::get('test', function () {
+    $data = new \App\Services\Expense\DailyExpenseSummary();
+    $data = $data->handle();
+    return new \App\Mail\ApplicationSummaryMail($data);
 });
