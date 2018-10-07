@@ -20,8 +20,9 @@ class ApplicationSummaryMail extends Mailable
 
     public function build()
     {
+        $name = config('app.name');
         return $this->markdown('emails.site-summary')
-            ->subject('Summary of Atlantis for today')
+            ->subject("Summary of {$name} for today")
             ->with('data', $this->data);
     }
 }
