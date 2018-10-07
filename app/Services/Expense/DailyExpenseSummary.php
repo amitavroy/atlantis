@@ -11,20 +11,34 @@ class DailyExpenseSummary
     {
         $yesterday = Carbon::yesterday();
 
-        $expenses = Expense::where('created_at', '>', $yesterday)->get();
+        $expenses = Expense::where('expenses.created_at', '>', $yesterday)
+            ->with('category')
+            ->get();
 
         $cat = [];
+        $paymentMethod = [];
+        $descriptons = [];
         foreach ($expenses as $expense) {
-            if (isset($cat[$expense->payment_method])) {
-                $cat[$expense->payment_method] = $cat[$expense->payment_method] + $expense->amount;
+            if (isset($paymentMethod[$expense->payment_method])) {
+                $paymentMethod[$expense->payment_method] = $paymentMethod[$expense->payment_method] + $expense->amount;
             } else {
-                $cat[$expense->payment_method] = $expense->amount;
+                $paymentMethod[$expense->payment_method] = $expense->amount;
             }
+
+            if (isset($cat[$expense->category->name])) {
+                $cat[$expense->category->name] = $cat[$expense->category->name] + $expense->amount;
+            } else {
+                $cat[$expense->category->name] = $expense->amount;
+            }
+
+            $descriptons[] = $expense->description;
         }
 
         $data = [
             'today_total' => $expenses->sum('amount'),
             'category_wise' => $cat,
+            'payment_method_wise' => $paymentMethod,
+            'descriptions' => $descriptons,
         ];
 
         return $data;

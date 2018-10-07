@@ -32,6 +32,7 @@ class DailyApplicationSummary extends Command
     public function handle(DailyExpenseSummary $dailyExpenseSummary)
     {
         $data = $dailyExpenseSummary->handle();
+
         Mail::to(User::find(1))->send(new ApplicationSummaryMail($data));
     }
 }
