@@ -5,7 +5,9 @@
     </form>
     <ul class="list-group">
       <li class="list-group-item" v-for="comment in comments" :key="comment.id">
-        <i class="fa fa-arrow-right"></i> {{comment.body}}
+        <i class="fa fa-arrow-right"></i>
+        <span>{{comment.body}}</span>
+        <span class="pull-right comment-date">{{getFormattedDate(comment.created_at)}}</span>
       </li>
     </ul>
   </div>
@@ -13,6 +15,7 @@
 
 <script>
   import axios from 'axios';
+  import moment from 'moment';
 
   export default {
     props: ['show', 'taskId', 'parentComments'],
@@ -36,6 +39,9 @@
           this.comments.unshift(data);
           this.commentText = '';
         });
+      },
+      getFormattedDate(string) {
+        return moment.utc(string, 'YYYY-MM-DD HH:mm:ss').format('MM/DD/YYYY h:mm a');
       }
     }
   }

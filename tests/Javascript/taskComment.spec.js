@@ -22,13 +22,13 @@ describe('Task comments', () => {
 
     wrapper.setData({
       comments: [
-        {'id': 1, 'body': 'This is my first comment'},
-        {'id': 2, 'body': 'This is my second comment'}
+        {'id': 1, 'body': 'This is my first comment', created_at: '2018-10-11 01:16:00'},
+        {'id': 2, 'body': 'This is my second comment', created_at: '2018-10-11 01:16:00'}
       ]
     });
 
-    expect(wrapper.find('.list-group-item:first-child').text()).toBe('This is my first comment');
-    expect(wrapper.find('.list-group-item:nth-child(2)').text()).toBe('This is my second comment');
+    expect(wrapper.find('.list-group-item:first-child').text()).toBe('This is my first comment 10/11/2018 1:16 am');
+    expect(wrapper.find('.list-group-item:nth-child(2)').text()).toBe('This is my second comment 10/11/2018 1:16 am');
   });
 
   it('Shows new comment when comment is added', (done) => {
@@ -45,11 +45,11 @@ describe('Task comments', () => {
 
     moxios.stubRequest('/api/tasks/comment', {
       status: 200,
-      response: {id: 3, body: 'This is a new comment'}
+      response: {id: 3, body: 'This is a new comment', created_at: '2018-10-11 01:16:00'}
     });
 
     moxios.wait(() => {
-      expect(wrapper.find('.list-group-item').text()).toBe('This is a new comment');
+      expect(wrapper.find('.list-group-item').text()).toBe('This is a new comment 10/11/2018 1:16 am');
       expect(wrapper.vm.$data.commentText).toBe('');
       done();
     });
@@ -78,5 +78,41 @@ describe('Task comments', () => {
       done();
     });
 
+  });
+
+  it('Shows comment with correct date', () => {
+    wrapper.setProps({
+      show: true,
+    });
+
+    wrapper.setData({
+      comments: [{id: 1, body: 'Test', created_at: '2018-10-11 01:16:00'}]
+    });
+
+    expect(wrapper.find('span.comment-date').text()).toBe('10/11/2018 1:16 am');
+  });
+
+  it('Shows comment with correct date and format', () => {
+    wrapper.setProps({
+      show: true,
+    });
+
+    wrapper.setData({
+      comments: [{id: 1, body: 'Test', created_at: '2018-10-11 23:59:00'}]
+    });
+
+    expect(wrapper.find('span.comment-date').text()).toBe('10/11/2018 11:59 pm');
+  });
+
+  it('Shows invalid date for wrong format', () => {
+    wrapper.setProps({
+      show: true,
+    });
+
+    wrapper.setData({
+      comments: [{id: 1, body: 'Test', created_at: '11-30-11 23:59:00'}]
+    });
+
+    expect(wrapper.find('span.comment-date').text()).toBe('Invalid date');
   });
 });
