@@ -24,5 +24,7 @@ class TaskDeletedListner implements ShouldQueue
         Comment::where('commentable_id', $event->taskId)
             ->where('commentable_type', 'App\Task')
             ->delete();
+
+        Cache::forget('dashStats.' . Auth::user()->family_id);
     }
 }
