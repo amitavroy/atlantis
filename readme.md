@@ -4,7 +4,7 @@
 
 ![Atlantis](https://d15dxe0kapai5v.cloudfront.net/misc/primt_02.jpg)
 
-This is an application which I will use for many of my day to day activity. It has many modules which are listed below:
+This is an application which I will use for many of my day to day activity. Customisations can be made for personal use as well. But, the overall development is not done with any multi tenant or multiple users of different groups in mind. The different modules available in this application is listed below with a brief of their specifications.
 
 ## Features
 1. Added the [Vali theme](https://pratikborsadiya.in/vali-admin/) to the project.
