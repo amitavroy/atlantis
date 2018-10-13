@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'GuestController@welcome')->name('welcome');
 
 Auth::routes();
@@ -39,8 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('/personal/documents', 'documents.document-index')->name('document.index');
 });
 
-Route::get('test', function () {
+//Route::get('test', function (\App\Services\Github\GitDataFetcher $dataFetcher) {
 //    $data = new \App\Services\Expense\DailyExpenseSummary();
 //    $data = $data->handle();
 //    return new \App\Mail\ApplicationSummaryMail($data);
-});
+//    return response()->json($dataFetcher->fetchGitProjectData());
+//});

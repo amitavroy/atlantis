@@ -27,3 +27,7 @@ Broadcast::channel('Dashboard', function () {
 Broadcast::channel('Expenses', function () {
     return true;
 });
+
+Broadcast::channel('GitProject', function () {
+    return true;
+});

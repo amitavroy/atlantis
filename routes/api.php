@@ -30,4 +30,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/document/list', 'DocumentController@index')->name('document.index');
     Route::get('/document/download', 'DocumentController@view')->name('document.download');
+
+    Route::get('git-projects/list', 'GitProjectController@list')->name('gitproject.list');
 });

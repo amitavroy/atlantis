@@ -32,5 +32,9 @@
     <div class="col-md-4">
         <site-monitor></site-monitor>
     </div>
+
+    <div class="col-md-4">
+        <git-stats></git-stats>
+    </div>
 </div>
 @endsection

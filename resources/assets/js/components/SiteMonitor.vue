@@ -10,7 +10,7 @@
         <h3 class="l-text">Loading</h3>
       </div>
       <div class="tile-title-w-btn">
-        <h3 class="title">Sites</h3>
+        <h3 class="title"><i class="fa fa-globe"></i> Sites</h3>
       </div>
       <div class="tile-body">
         <table class="table table-bordered" v-if="!loading">

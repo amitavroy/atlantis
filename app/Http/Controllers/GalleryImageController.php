@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Photo;
 use App\Services\Gallery\GalleryService;
 use Illuminate\Http\Request;
-use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 
 class GalleryImageController extends Controller

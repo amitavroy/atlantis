@@ -20,3 +20,7 @@ window.Echo.private('Dashboard').listen('.site.slow', data => {
 window.Echo.private('Expenses').listen('.expense.created', data => {
   window.eventBus.$emit('expenseAdded', data);
 });
+
+window.Echo.private('GitProject').listen('.project.update', data => {
+  window.eventBus.$emit('gitProjectUpdate', data);
+});

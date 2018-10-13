@@ -38,6 +38,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('site:summary')
             ->timezone('Asia/Kolkata')
             ->at('22:00');
+
+        $schedule->command('site:gitcheck')
+            ->everyFifteenMinutes();
     }
 
     /**
