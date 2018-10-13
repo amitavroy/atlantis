@@ -20,13 +20,6 @@ class GitProjectBlockTest extends TestCase
     }
 
     /** @test */
-    public function a_guest_cannot_see_project_status_api()
-    {
-        $response = $this->json('GET', route('gitproject.list'));
-        $response->assertStatus(401);
-    }
-
-    /** @test */
     public function a_logged_in_user_can_see_results()
     {
         $sticky = factory(GitProject::class)->create(['sticky' => now()]);
