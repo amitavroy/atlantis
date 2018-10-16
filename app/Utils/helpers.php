@@ -7,6 +7,13 @@ if (!function_exists('setActive')) {
     }
 }
 
+if (!function_exists('getProjectName')) {
+    function getProjectName($string)
+    {
+        return ucfirst(str_replace('amitavroy/', '', $string));
+    }
+}
+
 if (!function_exists('dashStats')) {
     function dashStats($dashStats, $key)
     {

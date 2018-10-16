@@ -5,6 +5,7 @@ namespace App\Services\Github;
 use App\Events\GitProject\GitProjectUpdateEvent;
 use App\GitProject;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 
 class GitDataFetcher
@@ -61,9 +62,15 @@ class GitDataFetcher
             return null;
         }
 
+        $gitProjectArr = $gitProject->toArray();
+        if ($gitProjectArr['stars'] != $project['watchers']
+            || $gitProjectArr['issues'] != $project['open_issues_count']) {
+            Cache::forget('dashStats.1');
+        }
+
         $gitProject->meta = $project;
         $gitProject->stars = $project['watchers'];
-        $gitProject->issues = $project['open_issues'];
+        $gitProject->issues = $project['open_issues_count'];
         $gitProject->save();
 
         Event::dispatch(new GitProjectUpdateEvent($gitProject));
