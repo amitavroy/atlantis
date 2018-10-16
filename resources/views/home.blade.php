@@ -30,7 +30,7 @@
     <div class="col-md-3">
         <icon-widget
                 color="primary"
-                text="Galleries"
+                text="Git &#9733;"
                 count="{{dashStats($dashData, 'git-stars')}}"
                 icon="fa-github"
         ></icon-widget>

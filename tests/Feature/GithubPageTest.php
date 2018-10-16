@@ -26,7 +26,7 @@ class GithubPageTest extends TestCase
         $project1 = factory(GitProject::class)->create();
         $this->actingAs($this->user)
             ->get(route('github.list'))
-            ->assertSee($project1->project_url)
+            ->assertSee(getProjectName($project1->project_url))
             ->assertStatus(200);
     }
 }

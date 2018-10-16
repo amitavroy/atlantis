@@ -36,7 +36,7 @@
                         <tbody>
                         @foreach($projects as $project)
                             <tr>
-                                <td>{{$project->project_url}}</td>
+                                <td>{{getProjectName($project->project_url)}}</td>
                                 <td>{{$project->stars}}</td>
                                 <td>{{$project->issues}}</td>
                                 <td>{{($project->sticky != null) ? 'Yes' : 'No'}}</td>
