@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\GitProject;
 use App\Services\DashboardService;
 use App\Task;
 use App\User;
@@ -56,5 +57,30 @@ class DashboardServiceTest extends TestCase
         $this->assertEquals(5, $dashData['tasks']);
 
         $this->assertEquals(10, Task::all()->count());
+    }
+
+    /** @test */
+    public function shows_count_of_stars()
+    {
+        factory(GitProject::class)->create(['stars' => 10]);
+        factory(GitProject::class)->create(['stars' => 5]);
+
+        $dashData = (new DashboardService())->getDashboardData();
+
+        $this->assertEquals(15, $dashData['git-stars']);
+    }
+
+    /** @test */
+    public function dash_starts_helper_shows_zero_when_no_index()
+    {
+        factory(GitProject::class)->create(['stars' => 10]);
+        factory(GitProject::class)->create(['stars' => 5]);
+
+        $dashData = (new DashboardService())->getDashboardData();
+        unset($dashData['git-stars']);
+
+        $stars = dashStats($dashData, 'git-stars');
+
+        $this->assertEquals(0, $stars);
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class GitProjectUpdateEvent
+class GitProjectUpdateEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     /**
@@ -22,7 +22,7 @@ class GitProjectUpdateEvent
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param GitProject $gitProject
      */
     public function __construct(GitProject $gitProject)
     {

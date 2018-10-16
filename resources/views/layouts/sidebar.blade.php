@@ -23,6 +23,11 @@
                     </a>
                 </li>
                 <li>
+                    <a class="treeview-item {{Route::is('github.list') ? 'active' : ''}}" href="{{route('github.list')}}">
+                        <i class="icon fa fa-circle-o"></i> Github projects
+                    </a>
+                </li>
+                <li>
                     <a class="treeview-item {{Route::is('expense.index') ? 'active' : ''}}" href="{{route('expense.index')}}">
                         <i class="icon fa fa-circle-o"></i> My Expenses
                     </a>

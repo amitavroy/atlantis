@@ -11,6 +11,9 @@
       </div>
       <div class="tile-title-w-btn">
         <h3 class="title"><i class="fa fa-github"></i> Github stats</h3>
+        <span class="pull-right">
+          <a href="/personal/git-projects"><i class="fa fa-chevron-right"></i></a>
+        </span>
       </div>
       <div class="tile-body">
         <table class="table table-bordered" v-if="!loading">
@@ -37,6 +40,7 @@
 <script>
   import _ from 'lodash';
   import axios from 'axios';
+  import Vue from 'vue';
   export default {
     data() {
       return {
@@ -46,9 +50,19 @@
     },
     created() {
       axios.get('/api/git-projects/list').then(response => this.handleGitProjectList(response));
+
+      window.eventBus.$on('gitProjectUpdate', data => {
+        let project = data.gitProject;
+        _.forEach(this.repos, (repo, key) => {
+          if (repo.id == project.id) {
+            Vue.set(this.repos, key, project);
+          }
+        });
+      });
     },
     methods: {
       handleGitProjectList(response) {
+        console.log('response', response);
         this.repos = response.data;
         this.loading = false;
       },
