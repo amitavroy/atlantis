@@ -25,7 +25,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/personal/gallery/add', 'GalleryController@add')->name('gallery.add');
     Route::get('/personal/gallery/{gallery}', 'GalleryController@view')->name('gallery.view');
 
+    /*Documents*/
     Route::view('/personal/documents', 'documents.document-index')->name('document.index');
+
+    /*Github Project URLs*/
+    Route::get('/personal/git-projects', 'GitProjectController@index')->name('github.list');
 });
 
 //Route::get('test', function (\App\Services\Github\GitDataFetcher $dataFetcher) {

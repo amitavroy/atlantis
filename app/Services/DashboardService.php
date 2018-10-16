@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\GitProject;
 use App\Site;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ class DashboardService
             'tasks' => count($this->getTaskCount()),
             'sites' => count($this->getSitesCount()),
             'galleries' => count($this->getGalleryCount()),
+            'git-stars' => $this->getTotalGitStarts(),
         ];
     }
 
@@ -35,5 +37,10 @@ class DashboardService
         return Gallery::where('family_id', Auth::user()->family_id)
             ->orderBy('created_at', 'desc')
             ->get();
+    }
+
+    private function getTotalGitStarts()
+    {
+        return GitProject::all()->sum('stars');
     }
 }

@@ -18,7 +18,8 @@ class GitProject extends Model
         return unserialize($value);
     }
 
-    public function stickyProjects()
+    public function getProjectUrlAttribute($value)
     {
+        return ucfirst(str_replace('amitavroy/', '', $value));
     }
 }

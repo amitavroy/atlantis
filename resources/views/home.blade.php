@@ -6,7 +6,7 @@
         <icon-widget
             color="info"
             text="Tasks"
-            count="{{$dashData['tasks']}}"
+            count="{{dashStats($dashData, 'tasks')}}"
             icon="fa-tasks"
             event-name="taskCountUpdated"
         ></icon-widget>
@@ -15,7 +15,7 @@
         <icon-widget
             color="warning"
             text="Sites"
-            count="{{$dashData['sites']}}"
+            count="{{dashStats($dashData, 'sites')}}"
             icon="fa-globe"
         ></icon-widget>
     </div>
@@ -23,8 +23,16 @@
         <icon-widget
             color="danger"
             text="Galleries"
-            count="{{$dashData['galleries']}}"
+            count="{{dashStats($dashData, 'galleries')}}"
             icon="fa-globe"
+        ></icon-widget>
+    </div>
+    <div class="col-md-3">
+        <icon-widget
+                color="primary"
+                text="Galleries"
+                count="{{dashStats($dashData, 'git-stars')}}"
+                icon="fa-github"
         ></icon-widget>
     </div>
 </div>

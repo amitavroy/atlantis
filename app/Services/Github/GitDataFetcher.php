@@ -28,7 +28,7 @@ class GitDataFetcher
     public function fetchGitProjectData()
     {
         $projects = GitProject::all();
-//        dd($projects);
+
         $data = collect();
 
         $projects->each(function ($project) use ($data) {
