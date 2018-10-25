@@ -17,7 +17,6 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 
 Broadcast::channel('Tasks', function () {
     return true;
-    return (int) $user->id === (int) $id;
 });
 
 Broadcast::channel('Dashboard', function () {

@@ -2,7 +2,7 @@
 
 ![Build Status](https://img.shields.io/travis/amitavroy/atlantis.svg)
 
-![Atlantis](https://d15dxe0kapai5v.cloudfront.net/misc/primt_02.jpg)
+![Atlantis](https://d15dxe0kapai5v.cloudfront.net/misc/primt_03.jpg)
 
 This is an application which I will use for many of my day to day activity. Customisations can be made for personal use as well. But, the overall development is not done with any multi tenant or multiple users of different groups in mind. The different modules available in this application is listed below with a brief of their specifications.
 

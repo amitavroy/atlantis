@@ -8,6 +8,8 @@ use App\Events\Task\TaskDeletedEvent;
 use App\Listeners\SiteCheck\SiteIsSlowListner;
 use App\Listeners\Tasks\TaskCreatedListner;
 use App\Listeners\Tasks\TaskDeletedListner;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskDeletedEvent::class => [
             TaskDeletedListner::class,
+        ],
+        Registered::class => [
+            SendEmailVerificationNotification::class,
         ],
     ];
 
