@@ -30,6 +30,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     /*Github Project URLs*/
     Route::get('/personal/git-projects', 'GitProjectController@index')->name('github.list');
+
+    /*Reminders*/
+    Route::get('/personal/reminders', 'ReminderController@index')->name('reminder.index');
+    Route::post('/personal/reminder/save', 'ReminderController@store')->name('reminder.save');
 });
 
 //Route::get('test', function (\App\Services\Github\GitDataFetcher $dataFetcher) {

@@ -18,6 +18,11 @@
                         class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li>
+                    <a class="treeview-item {{Route::is('reminder.index') ? 'active' : ''}}" href="{{route('reminder.index')}}">
+                        <i class="icon fa fa-circle-o"></i> My Reminders
+                    </a>
+                </li>
+                <li>
                     <a class="treeview-item {{Route::is('task.index') ? 'active' : ''}}" href="{{route('task.index')}}">
                         <i class="icon fa fa-circle-o"></i> My tasks
                     </a>
