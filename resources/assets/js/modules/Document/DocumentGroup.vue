@@ -14,6 +14,7 @@
         :file="file" :key="file.id"></document-file>
     </ul>
     <div v-if="loading">Loading...</div>
+    <document-upload></document-upload>
   </div>
 </template>
 
@@ -23,11 +24,12 @@
   import DocumentFolder from './DocumentFolder.vue';
   import DocumentFile from './DocumentFile.vue';
   import DocumentBreadcrumb from './DocumentBreadcrumb.vue';
+  import DocumentUpload from './DocumentUpload.vue';
   import LocalDB from './../../utils/LocalDB';
 
   export default {
     components: {
-      DocumentFolder, TopDrawer, DocumentFile, DocumentBreadcrumb
+      DocumentFolder, TopDrawer, DocumentFile, DocumentBreadcrumb, DocumentUpload
     },
     computed: {
       ...mapState({

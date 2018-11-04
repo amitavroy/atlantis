@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\SiteRecord;
 use Illuminate\Database\Eloquent\Model;
 
 class Site extends Model

@@ -1,5 +1,14 @@
 <template>
-  <li class="list-group-item cursor" v-on:click="fileSelected"><i class="fa fa-file mr-2"></i> {{fileName}}</li>
+  <li class="list-group-item cursor">
+    <span class="pull-left">
+      <i class="fa fa-file mr-2"></i> {{fileName}}
+    </span>
+    <span class="pull-right">
+      <i class="fa fa-download mr-3" v-on:click="fileSelected"></i>
+      <i class="fa fa-upload mr-3" v-on:click="fileUpload"></i>
+      <i class="fa fa-trash mr-3" v-on:click="fileUpload"></i>
+    </span>
+  </li>
 </template>
 
 <script>
@@ -29,6 +38,9 @@
           document.body.appendChild(link);
           link.click();
         });
+      },
+      fileUpload() {
+        window.eventBus.$emit('uploadFile', this.file);
       }
     }
   }

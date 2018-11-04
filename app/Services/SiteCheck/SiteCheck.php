@@ -5,8 +5,8 @@ namespace App\Services\SiteCheck;
 use App\Events\SiteCheck\SiteIsDownevent;
 use App\Events\SiteCheck\SiteIsNormalEvent;
 use App\Events\SiteCheck\SiteIsSlowEvent;
+use App\Models\SiteRecord;
 use App\Site;
-use App\SiteRecord;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Event;
 
