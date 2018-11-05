@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CheckSite;
 use App\Console\Commands\DailyApplicationSummary;
+use App\Console\Commands\GenerateReminderEvent;
 use App\Console\Commands\SiteCheckDataClear;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         CheckSite::class,
         SiteCheckDataClear::class,
         DailyApplicationSummary::class,
+        GenerateReminderEvent::class,
     ];
 
     /**
@@ -41,6 +43,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('site:gitcheck')
             ->everyFifteenMinutes();
+
+        $schedule->command('reminder:set')
+            ->daily();
     }
 
     /**
