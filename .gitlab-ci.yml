@@ -46,7 +46,7 @@ deploy_production:
   - ssh-add <(echo "$SSH_PRIVATE_KEY")
   - mkdir -p ~/.ssh
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-
+  - cp .env.example .env
   - composer global require laravel/envoy --ignore-platform-reqs
   - ~/.composer/vendor/bin/envoy run deploy --ssh=$SSH_PRIVATE_KEY
   environment:
