@@ -1,0 +1,57 @@
+image: edbizarro/gitlab-ci-pipeline-php:7.1
+
+services:
+  - mysql:5.7
+
+variables:
+  MYSQL_DATABASE: homestead
+  MYSQL_ROOT_PASSWORD: secret
+  DB_HOST: mysql
+  DB_USERNAME: root
+
+stages:
+  - test
+  - deploy
+
+unit_test:
+  stage: test
+  script:
+    - cp .env.example .env
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - php artisan key:generate
+    - php artisan migrate
+    - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
+  artifacts:
+    paths:
+    - ./storage/logs # for debugging
+    expire_in: 1 days
+    when: always
+
+# Speed up builds
+cache:
+  key: $CI_COMMIT_REF_NAME # changed to $CI_COMMIT_REF_NAME in Gitlab 9.x
+  paths:
+  - vendor
+  - node_modules
+  - public
+  - .yarn
+
+deploy_production:
+  stage: deploy
+  script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$TEST"
+  - echo "$SSH_PRIVATE_KEY"
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  - composer global require laravel/envoy --ignore-platform-reqs
+  - ~/.composer/vendor/bin/envoy run deploy --ssh=$SSH_PRIVATE_KEY
+  environment:
+    name: production
+    url: http://192.168.1.1
+  when: manual
+  only:
+  - master
