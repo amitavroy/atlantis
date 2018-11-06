@@ -32,4 +32,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/document/download', 'DocumentController@view')->name('document.download');
 
     Route::get('git-projects/list', 'GitProjectController@list')->name('gitproject.list');
+    Route::get('reminder-events/list', 'RemindEventController@index')->name('reminder-events.list');
 });

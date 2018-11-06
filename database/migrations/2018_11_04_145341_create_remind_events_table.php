@@ -18,6 +18,7 @@ class CreateRemindEventsTable extends Migration
             $table->unsignedInteger('reminder_id');
             $table->timestamp('reminder_at');
             $table->json('data')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

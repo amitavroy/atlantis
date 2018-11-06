@@ -16,4 +16,10 @@ return [
      */
     'git_secret' => env('GIT_CLIENT_SECRET', 'yyyy'),
 
+    /**
+     * This is the configuration on how many days before
+     * the reminder starts appearing on the Dashboard.
+     */
+    'reminder_range' => env('REMINDER_RANGE', 15),
+
 ];
