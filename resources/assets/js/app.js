@@ -25,6 +25,7 @@ Vue.component('gallery-view', require('./modules/Gallery/GalleryView.vue'));
 Vue.component('gallery-add', require('./modules/Gallery/GalleryAddCard.vue'));
 Vue.component('document-group', require('./modules/Document/DocumentGroup.vue'));
 Vue.component('git-stats', require('./modules/GitProject/GitStats.vue'));
+Vue.component('reminder-list', require('./modules/Reminder/ReminderList.vue'));
 
 window.eventBus = new Vue({});
 

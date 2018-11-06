@@ -12,6 +12,11 @@ class Reminder extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    public function events()
+    {
+        return $this->hasMany(RemindEvent::class);
+    }
     
     public function getRepeatAttribute()
     {

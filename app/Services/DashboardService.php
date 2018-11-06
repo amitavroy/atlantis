@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\GitProject;
+use App\Models\RemindEvent;
 use App\Site;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,7 @@ class DashboardService
             'sites' => count($this->getSitesCount()),
             'galleries' => count($this->getGalleryCount()),
             'git-stars' => $this->getTotalGitStarts(),
+            'reminders' => $this->getReminderData(),
         ];
     }
 
@@ -42,5 +44,17 @@ class DashboardService
     private function getTotalGitStarts()
     {
         return GitProject::all()->sum('stars');
+    }
+
+    private function getReminderData()
+    {
+        $reminderEvents = RemindEvent::where('is_active', 1)
+            ->whereHas('reminder', function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })
+            ->orderBy('remind_events.reminder_at', 'asc')
+            ->get();
+
+        return $reminderEvents;
     }
 }

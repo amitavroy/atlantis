@@ -44,5 +44,9 @@
     <div class="col-md-4">
         <git-stats></git-stats>
     </div>
+
+    <div class="col-md-4">
+        <reminder-list events="{{dashStats($dashData, 'reminders')}}"></reminder-list>
+    </div>
 </div>
 @endsection

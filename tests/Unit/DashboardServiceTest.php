@@ -3,9 +3,12 @@
 namespace Tests\Unit;
 
 use App\GitProject;
+use App\Models\Reminder;
 use App\Services\DashboardService;
 use App\Task;
 use App\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -82,5 +85,55 @@ class DashboardServiceTest extends TestCase
         $stars = dashStats($dashData, 'git-stars');
 
         $this->assertEquals(0, $stars);
+    }
+
+    /** @test */
+    public function a_user_can_see_his_reminder_events()
+    {
+        $reminder = factory(Reminder::class)->create([
+            'title' => 'Some reminder for testing',
+            'user_id' => $this->user->id,
+        ]);
+
+        factory(Reminder::class)->create([
+            'title' => 'Some reminder for testing by other user',
+            'user_id' => 2,
+        ]);
+
+        Artisan::call('reminder:set');
+
+        $dashData = (new DashboardService())->getDashboardData();
+
+        $responseArr = $dashData['reminders'];
+
+        $this->assertEquals($reminder->id, $responseArr->first()->reminder_id);
+    }
+
+    /** @test */
+    public function a_user_can_see_reminders_within_range_old()
+    {
+        $configDays = config('atlantis.reminder_range');
+
+        $reminder1 = factory(Reminder::class)->create([
+            'title' => 'On the edge',
+            'user_id' => $this->user->id,
+            'reminder_date' => Carbon::now()->addDays($configDays),
+        ]);
+
+        $reminder2 = factory(Reminder::class)->create([
+            'title' => 'before the range',
+            'user_id' => $this->user->id,
+            'reminder_date' => Carbon::now()->addDays($configDays)->subDays(2),
+        ]);
+
+        Artisan::call('reminder:set');
+
+        $dashData = (new DashboardService())->getDashboardData();
+
+        $responseArr = $dashData['reminders'];
+
+        $this->assertEquals(2, count($responseArr));
+        $this->assertEquals($reminder2->title, $responseArr[0]->data['reminder']['title']);
+        $this->assertEquals($reminder1->title, $responseArr[1]->data['reminder']['title']);
     }
 }
