@@ -6,6 +6,7 @@
         <a href="/personal/reminders"><i class="fa fa-chevron-right"></i></a>
       </span>
     </div>
+
     <div class="tile-body">
       <table class="table table-bordered">
         <thead>
@@ -26,23 +27,40 @@
         </tbody>
       </table>
     </div>
+
+    <modal name="expense-add"
+      height="auto"
+      v-on:opened="handleModalOpen">
+      <div class="m-3">
+        <expense-add></expense-add>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
   import ReminderAction from './ReminderAction.vue';
+  import ExpenseAdd from './../Expense/ExpenseAdd.vue';
   export default {
     props: ['events'],
     components: {
-      ReminderAction
+      ReminderAction, ExpenseAdd
     },
     created() {
       this.localEvents = JSON.parse(this.events);
+      window.eventBus.$on('reminderPaymentClick', () => {
+        this.$modal.show('expense-add');
+      });
     },
     data() {
       return {
         loading: true,
         localEvents: []
+      }
+    },
+    methods: {
+      handleModalOpen() {
+        window.eventBus.$emit('toggleAddExpenseForm');
       }
     }
   }

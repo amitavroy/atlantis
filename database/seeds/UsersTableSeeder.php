@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $family = \App\Family::create(['name' => 'The Roys']);
+        $family = \App\Models\Family::create(['name' => 'The Roys']);
         factory(\App\User::class)->create([
             'name' => 'Amitav Roy',
             'email' => 'reachme@amitavroy.com',
