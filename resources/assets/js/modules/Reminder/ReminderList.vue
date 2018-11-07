@@ -12,12 +12,16 @@
         <tr>
           <th>Description</th>
           <th>Date</th>
+          <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="event in localEvents">
           <td>{{event.data.reminder.title}}</td>
           <td>{{event.data.reminder.reminder_date}}</td>
+          <td>
+            <reminder-action :type="event.data.reminder.type"></reminder-action>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -26,8 +30,12 @@
 </template>
 
 <script>
+  import ReminderAction from './ReminderAction.vue';
   export default {
     props: ['events'],
+    components: {
+      ReminderAction
+    },
     created() {
       this.localEvents = JSON.parse(this.events);
     },
