@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Tasks;
 
-use App\Comment;
+use App\Models\Comment;
 use App\Events\Task\TaskDeletedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Auth;

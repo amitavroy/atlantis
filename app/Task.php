@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
