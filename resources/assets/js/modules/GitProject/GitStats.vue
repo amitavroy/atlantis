@@ -49,7 +49,9 @@
       }
     },
     created() {
-      axios.get('/api/git-projects/list').then(response => this.handleGitProjectList(response));
+      axios.get('/api/git-projects/list').then(response => {
+        this.handleGitProjectList(response)
+      }).catch(error => {});
 
       window.eventBus.$on('gitProjectUpdate', data => {
         let project = data.gitProject;
@@ -62,7 +64,6 @@
     },
     methods: {
       handleGitProjectList(response) {
-        console.log('response', response);
         this.repos = response.data;
         this.loading = false;
       },

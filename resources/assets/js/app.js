@@ -9,9 +9,11 @@ require('./bootstrap');
 require('./utils/globalUtils');
 require('vuejs-confirm-directive');
 
-import store from './store'
+import store from './store';
+import VModal from 'vue-js-modal';
 
 window.Vue = require('vue');
+Vue.use(VModal);
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('sidebar-toggle', require('./components/SidebarToggle.vue'));

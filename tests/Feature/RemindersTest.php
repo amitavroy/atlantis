@@ -24,10 +24,12 @@ class RemindersTest extends TestCase
     {
         $myReminder = factory(Reminder::class)->create([
             'user_id' => $this->user->id,
+            'title' => 'My own reminder',
         ]);
 
         $otherReminder = factory(Reminder::class)->create([
             'user_id' => 2,
+            'title' => 'Some other reminder',
         ]);
 
         $this->actingAs($this->user)

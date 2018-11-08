@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\Expense\ExpenseAddedEvent;
 use App\Events\SiteCheck\SiteIsSlowEvent;
 use App\Events\Task\TaskCreatedEvent;
 use App\Events\Task\TaskDeletedEvent;
+use App\Listeners\Expense\ClearReminder;
 use App\Listeners\SiteCheck\SiteIsSlowListner;
 use App\Listeners\Tasks\TaskCreatedListner;
 use App\Listeners\Tasks\TaskDeletedListner;
@@ -33,6 +35,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        ExpenseAddedEvent::class => [
+            ClearReminder::class,
+        ]
     ];
 
     /**
