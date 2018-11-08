@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="event in localEvents">
+        <tr v-for="event in localEvents" v-bind:key="event.id">
           <td>{{event.data.reminder.title}}</td>
           <td>{{event.data.reminder.reminder_date}}</td>
           <td>

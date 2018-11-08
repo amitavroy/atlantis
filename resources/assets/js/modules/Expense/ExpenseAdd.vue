@@ -61,7 +61,7 @@
 
       axios.get('/api/expenses/categories').then(response => {
         this.options = _.map(response.data, 'name');
-      });
+      }).catch(error => {});
     },
     methods: {
       setEmptyDescription() {
