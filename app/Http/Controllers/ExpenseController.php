@@ -69,9 +69,11 @@ class ExpenseController extends Controller
             'amount' => $request->input('amount'),
             'payment_method' => $request->input('type'),
             'expense_type_id' => $categories->where('name', $request->input('category'))->first()->id,
+            'reminder_id' => ($request->has('reminder_id')) ? $request->input('reminder_id') : null,
         ]);
 
-        $expense = Expense::with('user')->where('id', $expenseCreated->id)->get();
+        $expense = Expense::with('user')
+            ->where('id', $expenseCreated->id)->get();
 
         $expense = $this->expenseService->expensesForView($expense, $categories)[0];
 

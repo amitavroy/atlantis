@@ -13,11 +13,14 @@
 
 <script>
 export default {
-  props: ['type'],
+  props: ['type', 'reminder'],
   methods: {
     handleBillPayClick() {
-      window.eventBus.$emit('reminderPaymentClick');
-      // window.eventBus.$emit('toggleAddExpenseForm');
+      let expense = {
+        "description": "Payment of " + this.reminder.title + " due " + this.reminder.reminder_date,
+        "reminder_id": this.reminder.id
+      }
+      window.eventBus.$emit('reminderPaymentClick', expense);
     }
   }
 }

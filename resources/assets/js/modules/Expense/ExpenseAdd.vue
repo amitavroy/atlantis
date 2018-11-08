@@ -50,8 +50,13 @@
       }
     },
     created() {
-      window.eventBus.$on('toggleAddExpenseForm', () => {
+      window.eventBus.$on('toggleAddExpenseForm', (expenseData) => {
         this.show = !this.show;
+        if (expenseData != null) {
+          this.expense.description = expenseData.description;
+          this.expense.category = 'Bills';
+          this.expense.reminder_id = expenseData.reminder_id;
+        }
       });
 
       axios.get('/api/expenses/categories').then(response => {
@@ -71,6 +76,7 @@
       handleFormSubmit() {
         axios.post('/api/expenses', this.expense).then(response => {
           this.expense = this.setEmptyDescription();
+          window.eventBus.$emit('expenseSaved', response.data);
         });
       }
     }

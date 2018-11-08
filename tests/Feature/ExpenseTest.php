@@ -5,8 +5,11 @@ namespace Tests\Feature;
 use App\Events\Expense\ExpenseAddedEvent;
 use App\Expense;
 use App\ExpenseType;
+use App\Models\Reminder;
+use App\Models\RemindEvent;
 use App\Services\Expense\ExpenseService;
 use App\User;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -141,6 +144,83 @@ class ExpenseTest extends TestCase
         ]);
 
         $this->saveExpense($this->user, $category);
+    }
+
+    /** @test */
+    public function expense_has_reminder_id_when_provided()
+    {
+        $category = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Test',
+        ]);
+
+        $reminder = factory(Reminder::class)->create();
+
+        $postData = [
+            'description' => 'Some expense description',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $category->name,
+            'type' => 'Cash',
+            'reminder_id' => $reminder->id,
+        ];
+
+        $response = $this->saveExpense($this->user, $category, $postData);
+
+        $response = (array) json_decode($response->getContent());
+
+        $this->assertEquals($reminder->id, $response['reminder_id']);
+    }
+
+    /** @test */
+    public function expense_has_null_reminder_id_when_not_provided()
+    {
+        $category = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Test',
+        ]);
+
+        $postData = [
+            'description' => 'Some expense description',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $category->name,
+            'type' => 'Cash',
+        ];
+
+        $response = $this->saveExpense($this->user, $category, $postData);
+
+        $response = (array) json_decode($response->getContent());
+
+        $this->assertEquals(null, $response['reminder_id']);
+    }
+
+    /** @test */
+    public function a_reminder_payment_sets_event_inactive()
+    {
+        $category = factory(ExpenseType::class)->create([
+            'family_id' => $this->user->family_id,
+            'name' => 'Test',
+        ]);
+
+        $reminder = factory(Reminder::class)->create();
+
+        Artisan::call('reminder:set');
+
+        $postData = [
+            'description' => 'Some expense description',
+            'transaction_date' => '2018-07-31',
+            'amount' => 465,
+            'category' => $category->name,
+            'type' => 'Cash',
+            'reminder_id' => $reminder->id,
+        ];
+
+        $this->saveExpense($this->user, $category, $postData);
+
+        $reminderEvent = RemindEvent::where('reminder_id', $reminder->id)->first();
+
+        $this->assertEquals(0, $reminderEvent->is_active);
     }
     
     /** @test */
