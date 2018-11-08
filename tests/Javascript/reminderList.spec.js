@@ -11,7 +11,7 @@ describe('Reminder list component', () => {
     // wrapper = mount(ReminderList);
   });
 
-  it.only('shows reminder list when reminder events are passed', () => {
+  it('shows reminder list when reminder events are passed', () => {
     // wrapper.setProps({
     //   events: [{
     //     data: {
