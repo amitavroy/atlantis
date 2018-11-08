@@ -21,10 +21,6 @@ unit_test:
     - php artisan key:generate
     - php artisan migrate
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
-    - npm install npm@latest -g
-    - npm install -g jshint
-    - npm install
-    - npm run test
   artifacts:
     paths:
     - ./storage/logs # for debugging
