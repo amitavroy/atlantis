@@ -2,7 +2,7 @@
 
 ![Build Status](https://img.shields.io/travis/amitavroy/atlantis.svg)
 
-![Atlantis](https://d15dxe0kapai5v.cloudfront.net/misc/primt_03.jpg)
+![Atlantis](https://d15dxe0kapai5v.cloudfront.net/misc/prime_04.jpg)
 
 This is an application which I will use for many of my day to day activity. Customisations can be made for personal use as well. But, the overall development is not done with any multi tenant or multiple users of different groups in mind. The different modules available in this application is listed below with a brief of their specifications.
 
@@ -18,6 +18,8 @@ This is an application which I will use for many of my day to day activity. Cust
 5. Document management - Using S3 bucket, I can manage my documents. I can view the files on the S3 bucket. [NOTE: WIP - more features to come]
 
 6. Github Projects - Using the Github project module, I can keep an eye on the key parameters of some of my selected projects like Stars, Issues. Will also need to add the Downloads information which will be available from Packagist.
+
+7. Reminder - As a user, I can set up different kinds of reminders like 'Bill', 'Birthday' etc. Everyday, the application will check for any new reminder and then create an event for the same. These events will be visible on the dashboard. Right now, for Bills, there is a Pay button which will allow to make a payment and add an expense linking the reminder to it.
 
 ## Installation
 The process to install and run this application are mentioned below. Note that this is primarily for development version and if you want to deploy this kind of an app on any server, there are certain things which you need to secure like Laravel Echo Server keys, ports for running the socket connection, run the server in production mode and few more things.
