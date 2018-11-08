@@ -21,8 +21,6 @@ unit_test:
     - php artisan key:generate
     - php artisan migrate
     - ./vendor/phpunit/phpunit/phpunit -v --coverage-text --colors=never --stderr
-    
-    - nvm install 8.9.3
     - npm install npm@latest -g
     - npm install -g jshint
     - npm install
