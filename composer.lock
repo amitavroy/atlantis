@@ -4,8 +4,48 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9890e893410257310edb9cbfad9b73d9",
+    "content-hash": "3e11dc55e0bd9b3ebdcf210dee64927f",
     "packages": [
+        {
+            "name": "amitavroy/backup-manager",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amitavroy/backup-manager.git",
+                "reference": "3d0c5c4f2af59ce9b9348a977068f5df02472952"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amitavroy/backup-manager/zipball/3d0c5c4f2af59ce9b9348a977068f5df02472952",
+                "reference": "3d0c5c4f2af59ce9b9348a977068f5df02472952",
+                "shasum": ""
+            },
+            "require": {
+                "spatie/db-dumper": "^2.9"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Amitav\\Backup\\BackupServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Amitav\\Backup\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Amitav Roy",
+                    "email": "reachme@amitavroy.com"
+                }
+            ],
+            "description": "This Laravel package allows you to create a backup of your database. You can use any file system which Laravel supports like S3, FTP, local etc.",
+            "time": "2018-04-19T13:04:53+00:00"
+        },
         {
             "name": "aws/aws-sdk-php",
             "version": "3.69.14",
@@ -2299,6 +2339,56 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "spatie/db-dumper",
+            "version": "2.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/db-dumper.git",
+                "reference": "858ea38e341e2e5f74a5b59cc8184c5c7e94b50d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/858ea38e341e2e5f74a5b59cc8184c5c7e94b50d",
+                "reference": "858ea38e341e2e5f74a5b59cc8184c5c7e94b50d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/process": "^3.0|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DbDumper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dump databases",
+            "homepage": "https://github.com/spatie/db-dumper",
+            "keywords": [
+                "database",
+                "db-dumper",
+                "dump",
+                "mysqldump",
+                "spatie"
+            ],
+            "time": "2018-09-27T06:30:34+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
