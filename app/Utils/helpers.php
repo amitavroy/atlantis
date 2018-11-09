@@ -20,3 +20,16 @@ if (!function_exists('dashStats')) {
         return (isset($dashStats[$key])) ? $dashStats[$key] : '0';
     }
 }
+
+if (!function_exists('getUrls')) {
+    function getUrls($url)
+    {
+        $env = config('app.env');
+
+        if ($env === 'production') {
+            return mix($url);
+        }
+
+        return asset($url);
+    }
+}
