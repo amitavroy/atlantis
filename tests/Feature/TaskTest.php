@@ -65,6 +65,8 @@ class TaskTest extends TestCase
     /** @test */
     public function a_user_can_create_task()
     {
+        $this->disableExceptionHandling();
+        
         $this->actingAs($this->user)
             ->get(route('task.add'))
             ->assertStatus(200);
