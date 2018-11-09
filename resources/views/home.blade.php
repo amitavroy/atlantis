@@ -37,7 +37,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <site-monitor></site-monitor>
     </div>
 
@@ -45,7 +45,7 @@
         <git-stats></git-stats>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-5">
         <reminder-list events="{{dashStats($dashData, 'reminders')}}"></reminder-list>
     </div>
 </div>
