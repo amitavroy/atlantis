@@ -23,7 +23,7 @@
           <tbody>
             <tr v-for="site in sites" v-bind:key='site.id'>
               <td>{{site.name}}</td>
-              <td>{{site.avg_time}}</td>
+              <td>{{siteTimeTrimmed(site.avg_time)}}</td>
             </tr>
           </tbody>
         </table>
@@ -55,6 +55,9 @@ export default {
       _.forEach(this.sites, (value, key) => {
         (value.id === currentSite.id) ? this.sites[key].avg_time = currentSite.avg_time : null;
       });
+    },
+    siteTimeTrimmed(number) {
+      return parseFloat(number).toFixed(2);
     }
   }
 }
