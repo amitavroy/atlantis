@@ -8,6 +8,7 @@ use App\Console\Commands\GenerateReminderEvent;
 use App\Console\Commands\SiteCheckDataClear;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Amitav\Backup\Command\BackupDatabase;
 
 class Kernel extends ConsoleKernel
 {
@@ -21,6 +22,7 @@ class Kernel extends ConsoleKernel
         SiteCheckDataClear::class,
         DailyApplicationSummary::class,
         GenerateReminderEvent::class,
+        BackupDatabase::class,
     ];
 
     /**
@@ -45,6 +47,9 @@ class Kernel extends ConsoleKernel
             ->everyFifteenMinutes();
 
         $schedule->command('reminder:set')
+            ->daily();
+
+        $schedule->command('backup:database')
             ->daily();
     }
 
