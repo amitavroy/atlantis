@@ -14,7 +14,13 @@
         :file="file" :key="file.id"></document-file>
     </ul>
     <div v-if="loading">Loading...</div>
-    <document-upload></document-upload>
+    <modal name="file-upload"
+           height="auto"
+           v-on:opened="handleModalOpen">
+      <div class="m-3">
+        <document-upload></document-upload>
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -46,6 +52,7 @@
 
       window.eventBus.$on('directory_loading', () => this.loading = true);
       window.eventBus.$on('directory_loaded', () => this.loading = false);
+      window.eventBus.$on('upload_file', () => this.$modal.show('file-upload'));
     },
     data() {
       return {
@@ -58,6 +65,8 @@
         this.$store.dispatch('getFolderStructure', folderPath).then(response => {
           this.loading = false
         });
+      },
+      handleModalOpen() {
       }
     }
   }

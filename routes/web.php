@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 Route::get('/', 'GuestController@welcome')->name('welcome');
 
 Auth::routes(['verify' => true]);
@@ -36,9 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/personal/reminder/save', 'ReminderController@store')->name('reminder.save');
 });
 
-//Route::get('test', function (\App\Services\Github\GitDataFetcher $dataFetcher) {
-//    $data = new \App\Services\Expense\DailyExpenseSummary();
-//    $data = $data->handle();
-//    return new \App\Mail\ApplicationSummaryMail($data);
-//    return response()->json($dataFetcher->fetchGitProjectData());
-//});
+Route::post('upload', function (Request $request) {
+
+});

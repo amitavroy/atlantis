@@ -29,4 +29,16 @@ class DocumentController extends Controller
         $storage = Storage::disk('s3');
         return $storage->download($file);
     }
+
+    public function store(Request $request)
+    {
+        $currentPath = $request->input('currentPath');
+        $file = $request->file('file');
+        $filename = $file->getClientOriginalName();
+        $file->storeAs("{$currentPath}/", $filename, 's3');
+        $files = Storage::files($currentPath);
+
+        return response()
+            ->json($files, 201);
+    }
 }
