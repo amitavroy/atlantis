@@ -32,9 +32,12 @@
         let formData = new FormData();
         formData.append('file', this.file);
         formData.append('currentPath', this.documentStore.folders.path);
-        window.axios.post('/upload', formData, {
+        window.axios.post('/api/document/upload', formData, {
           headers: {'Content-Type': 'multipart/form-data'}
-        }).then(response => this.$store.dispatch('getFolderStructure', this.documentStore.folders.path))
+        }).then(() => {
+          this.$store.dispatch('getFolderStructure', this.documentStore.folders.path);
+          window.eventBus.$emit('fileUploaddone');
+        })
           .catch(error => error);
       }
     }

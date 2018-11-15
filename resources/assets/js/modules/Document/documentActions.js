@@ -27,5 +27,12 @@ export const actions = {
       window.eventBus.$emit('directory_loaded');
       return response
     });
+  },
+  handleFileDelete: ({commit}, postData) => {
+    return axios.post('/api/document/delete', postData).then(response => {
+      commit('SET_DIRECTORIES', response.data);
+      window.eventBus.$emit('directory_loaded');
+      return response;
+    });
   }
 };

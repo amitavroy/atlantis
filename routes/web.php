@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 Route::get('/', 'GuestController@welcome')->name('welcome');
 
 Auth::routes(['verify' => true]);
@@ -36,8 +34,4 @@ Route::group(['middleware' => 'auth'], function () {
     /*Reminders*/
     Route::get('/personal/reminders', 'ReminderController@index')->name('reminder.index');
     Route::post('/personal/reminder/save', 'ReminderController@store')->name('reminder.save');
-});
-
-Route::post('upload', function (Request $request) {
-
 });

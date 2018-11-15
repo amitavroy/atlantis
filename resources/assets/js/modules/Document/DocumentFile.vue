@@ -6,7 +6,7 @@
     <span class="pull-right">
       <i class="fa fa-download mr-3" v-on:click="fileSelected"></i>
       <i class="fa fa-upload mr-3" v-on:click="fileUpload"></i>
-      <i class="fa fa-trash mr-3" v-on:click="fileUpload"></i>
+      <i class="fa fa-trash mr-3" v-on:click="fileDelete"></i>
     </span>
   </li>
 </template>
@@ -14,6 +14,7 @@
 <script>
   import {mapState} from 'vuex';
   import axios from 'axios';
+
   export default {
     props: ['file'],
     computed: {
@@ -41,6 +42,23 @@
       },
       fileUpload() {
         window.eventBus.$emit('uploadFile', this.file);
+      },
+      fileDelete() {
+        let conf = confirm(`Are you sure you want to delete ${this.file}`);
+
+        if (!conf) {
+          return false;
+        }
+
+        let postData = {
+          currentPath: this.documentStore.folders.path,
+          filePath: this.file
+        }
+
+        this.$store.dispatch('handleFileDelete', postData)
+          .then(response => {
+          })
+          .catch(error => console.error(error));
       }
     }
   }

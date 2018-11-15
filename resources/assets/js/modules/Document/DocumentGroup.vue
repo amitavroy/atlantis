@@ -53,6 +53,7 @@
       window.eventBus.$on('directory_loading', () => this.loading = true);
       window.eventBus.$on('directory_loaded', () => this.loading = false);
       window.eventBus.$on('upload_file', () => this.$modal.show('file-upload'));
+      window.eventBus.$on('fileUploaddone', () => this.$modal.hide('file-upload'));
     },
     data() {
       return {
