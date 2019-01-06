@@ -99,4 +99,13 @@ return [
         ],
     ],
 
+    /**
+     * For custom mobile login and getting access and refresh token,
+     * client_id and client_secret are provided through this config
+     */
+    'mobile' => [
+        'client_id' => env('MOBILE_CLIENT_ID'),
+        'client_secret' => env('MOBILE_CLIENT_SECRET')
+    ]
+
 ];

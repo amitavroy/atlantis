@@ -35,3 +35,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('git-projects/list', 'GitProjectController@list')->name('gitproject.list');
 });
+
+Route::post('mobile-login', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')
+    ->middleware(['throttle', 'mobile-login']);
