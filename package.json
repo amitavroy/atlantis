@@ -13,7 +13,7 @@
     "devDependencies": {
         "@vue/test-utils": "^1.0.0-beta.20",
         "axios": "^0.18",
-        "bootstrap": "^4.0.0",
+        "bootstrap": "^4.3.1",
         "cross-env": "^5.1",
         "expect": "^23.4.0",
         "jquery": "^3.2",
